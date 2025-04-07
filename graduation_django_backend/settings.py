@@ -32,14 +32,19 @@ AUTH_USER_MODEL = 'user.UserModel'
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    # "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "apps.model_test",
     "apps.user",
+    "apps.team",
+    "apps.competition",
+    "apps.admin",
+    "apps.college",
+    "apps.teacher",
+    "apps.student",
 ]
 
 MIDDLEWARE = [
