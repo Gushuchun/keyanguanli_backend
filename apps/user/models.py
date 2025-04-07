@@ -1,33 +1,22 @@
-# -*- coding:utf-8 -*-
-"""
-@author: vfeng
-@contact: 1914007838@qq.com
-@time: 2022/4/10 0:36
-@desc:
-"""
-# -*- coding:utf-8 -*-
-__author__ = 'vfeng'
-__datetime__ = '2021/6/1 16:13'
-
-import datetime
-import logging
-import random
-import traceback
-
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
+from cryptography.fernet import Fernet
+from django.conf import settings
+
+FERNET_KEY = settings.FERNET_KEY  # 假设密钥存在于 settings.py 文件中
+cipher = Fernet(FERNET_KEY)
+
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, password=None):
+    def create_user(self, username, email, password=None, role='student'):
         """
         Creates and saves a User with the given email
         """
         user = self.model(
             username=username,
+            role=role,
         )
         if email:
             user.email = UserManager.normalize_email(email) or None
@@ -79,6 +68,7 @@ class UserModel(AbstractUser):
     email = models.EmailField(default=None, blank=True, null=True, verbose_name='邮箱')
     tel = models.CharField(max_length=32, null=True, blank=True, verbose_name="手机号", )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, null=True, verbose_name="性别", )
+    role = models.CharField(max_length=32, verbose_name="角色", default='student')
 
     objects = UserManager()
 
@@ -98,4 +88,18 @@ class UserModel(AbstractUser):
         if self.is_staff or self.is_superuser:
             return True
         return False
+
+    def set_cn(self, value):
+        """加密身份证号"""
+        self.cn = cipher.encrypt(value.encode()).decode()
+
+    def get_cn(self):
+        """解密身份证号"""
+        return cipher.decrypt(self.cn.encode()).decode()
+
+    # 在保存模型之前自动加密身份证号
+    def save(self, *args, **kwargs):
+        if self.cn:
+            self.set_cn(self.cn)  # 自动加密 cn 字段
+        super().save(*args, **kwargs)
 

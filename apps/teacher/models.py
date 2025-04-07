@@ -19,7 +19,7 @@ class Teacher(BaseModel):
 
     id = models.AutoField(primary_key=True)
     sn = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    name = models.CharField('姓名', max_length=50)
+    username = models.CharField('姓名', max_length=50)
     gender = models.BooleanField('性别', choices=GENDER_CHOICES, default=True)
     college_id = models.CharField('学院id', max_length=100)
     phone = models.CharField('电话', max_length=20, blank=True)
