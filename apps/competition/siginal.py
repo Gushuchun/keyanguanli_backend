@@ -16,8 +16,18 @@ def update_competition_status(sender, instance, **kwargs):
         if competition.status != 'confirmed':
             unconfirmed_exists = CompetitionMemberConfirm.objects.filter(
                 sn=competition.sn,
-                status='pending'
+                status='pending',
+                is_cap=False
             ).exists()
+
+            unconfirmed_exists_1 = CompetitionMemberConfirm.objects.filter(
+                sn=competition.sn,
+                is_cap=False,
+                state=1
+            ).exists()
+
+            if not unconfirmed_exists_1 :
+                return
 
             if not unconfirmed_exists:
                 competition.status = 'confirmed'

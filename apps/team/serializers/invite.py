@@ -51,7 +51,7 @@ class TeamCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         member_ids = validated_data.pop('member_ids', [])
-        teacher_id = validated_data.pop('teacher_id', None)
+        teacher_ids = validated_data.pop('teacher_id', [])
         captain_sn = self.context['request'].sn
 
         # teacher_id = Teacher.objects.filter(sn=teacher_id).first().sn
@@ -80,15 +80,13 @@ class TeamCreateSerializer(serializers.ModelSerializer):
                     team=team.id,
                     member_id=member_id,
                     cap=captain_sn,
-                    teacher=teacher_id,
                     status='0'
                 ))
 
             # 创建老师邀请（如果有老师）
-            if teacher_id:
+            for teacher_id in teacher_ids:
                 invites.append(TeamInvite(
                     team=team.id,
-                    member_id=teacher_id,
                     teacher=teacher_id,
                     cap=captain_sn,
                     status='0'

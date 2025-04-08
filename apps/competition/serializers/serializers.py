@@ -7,10 +7,16 @@ from django.utils.translation import gettext_lazy as _
 
 class CompetitionSerializer(serializers.ModelSerializer):
     note = serializers.CharField(required=False, allow_blank=True)
+    teacher_ids = serializers.ListField(
+        child=serializers.UUIDField(),
+        write_only=True,
+        required=False,
+        default=[]
+    )
 
     class Meta:
         model = Competition
-        fields = ['sn', 'date', 'description', 'score', 'teacher', 'team_id', 'file', 'note', 'title']
+        fields = ['sn', 'date', 'description', 'score', 'team_id', 'file', 'note', 'title','teacher_ids']
         extra_kwargs = {
             'sn': {'read_only': True},
             'status': {'read_only': True},
@@ -37,6 +43,7 @@ class CompetitionSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
+        teacher_ids = validated_data.pop('teacher_ids', [])
         with transaction.atomic():
             # 创建比赛记录
             competition = Competition.objects.create(
@@ -45,11 +52,27 @@ class CompetitionSerializer(serializers.ModelSerializer):
             )
 
             # 为每个团队成员创建确认记录
-            team_members = StudentToTeam.objects.filter(team=validated_data['team_id'], is_cap=False)
+            team_members = StudentToTeam.objects.filter(team=validated_data['team_id'])
             for member in team_members:
+                if member.is_cap == False:
+                    CompetitionMemberConfirm.objects.create(
+                        sn=competition.sn,
+                        student=member.student,
+                        status='pending',
+                        is_cap = False
+                    )
+                else:
+                    CompetitionMemberConfirm.objects.create(
+                        sn=competition.sn,
+                        student=member.student,
+                        status='confirmed',
+                        is_cap = True
+                    )
+
+            for teacher_id in teacher_ids:
                 CompetitionMemberConfirm.objects.create(
                     sn=competition.sn,
-                    student=member.student,
+                    teacher=teacher_id,
                     status='pending'
                 )
 
@@ -59,21 +82,23 @@ class CompetitionSerializer(serializers.ModelSerializer):
 class CompetitionMemberConfirmSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompetitionMemberConfirm
-        fields = ['sn', 'student', 'status', 'note']
+        fields = ['sn', 'student', 'status', 'note', 'teacher']
         extra_kwargs = {
             'sn': {'read_only': True},
             'student': {'read_only': True},
+            'teacher': {'read_only': True},
         }
 
     def validate_status(self, value):
-        if value != 'confirmed':
+        if value != 'confirmed' and value is not None:
             raise serializers.ValidationError("状态只能更新为 'confirmed'")
         return value
 
     def validate(self, attrs):
-        # 确保请求用户是记录对应的学生
-        if str(self.context['request'].sn) != str(self.instance.student):
-            raise PermissionDenied("只能确认自己的参赛记录")
+        # 确保请求用户是记录对应的用户
+        if str(self.context['request'].sn) != str(self.instance.student) and \
+                str(self.context['request'].sn) != str(self.instance.teacher):
+            raise PermissionDenied("只能确认自己的参赛记录或作为带队老师确认")
         return attrs
 
 

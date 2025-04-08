@@ -1,9 +1,12 @@
+from django.db.models import Q
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from apps.competition.models import Competition, CompetitionMemberConfirm
 from apps.competition.serializers import CompetitionSerializer, CompetitionMemberConfirmSerializer, CompetitionUpdateSerializer
+from apps.team.models import StudentToTeam, Team
 from utils.BaseView import BaseModelViewSet
 import logging
+from rest_framework.decorators import action
 
 logger = logging.getLogger('competition')
 logger_security = logging.getLogger('security')
@@ -61,20 +64,100 @@ class CompetitionViewSet(BaseModelViewSet):
             "code": 200
         })
 
+    @action(detail=False, methods=['get'], url_path='my')
+    def my_competitions(self, request):
+
+        # 1. 获取用户已确认的比赛ID列表（包括作为学生和老师）
+        confirmed_as_student = CompetitionMemberConfirm.objects.filter(
+            student=request.sn,
+            status='confirmed',
+            state=1
+        ).values_list('sn', flat=True)
+
+        confirmed_as_teacher = CompetitionMemberConfirm.objects.filter(
+            teacher=request.sn,
+            status='confirmed',
+            state=1
+        ).values_list('sn', flat=True)
+
+        # 合并并去重
+        all_competition_ids = list(set(confirmed_as_student) | set(confirmed_as_teacher))
+
+        # 2. 获取完整的比赛信息
+        competitions = Competition.objects.filter(
+            sn__in=all_competition_ids,
+            state=1
+        ).order_by('-date')  # 按日期降序
+
+        # 3. 分页处理
+        page = self.paginate_queryset(competitions)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(competitions, many=True)
+        return Response({
+            "message": "获取成功",
+            "data": serializer.data,
+            "code": 200
+        })
+
+    @action(detail=False, methods=['get'], url_path='team')
+    def team_competitions(self, request):
+        """查看指定团队的比赛"""
+        # 1. 获取前端传来的team_id参数
+        team_id = request.query_params.get('team_id')
+        if not team_id:
+            return Response({
+                "message": "缺少team_id参数",
+                "code": 400
+            })
+
+        # 3. 查询该团队的所有比赛
+        competitions = Competition.objects.filter(
+            team_id=team_id,
+            state=1
+        ).order_by('-date')  # 按比赛日期降序排列
+
+        # 4. 分页处理
+        page = self.paginate_queryset(competitions)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(competitions, many=True)
+        return Response({
+            "message": "获取成功",
+            "data": serializer.data,
+            "code": 200
+        })
+
+    @action(detail=False, methods=['get'], url_path='all')
+    def all_competitions(self, request):
+        competitions = Competition.objects.filter(state=1)
+        serializer = self.get_serializer(competitions, many=True)
+        page = self.paginate_queryset(competitions)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        return Response({"message": "获取成功", "data": serializer.data, "code": 200})
+
+
 class CompetitionConfirmViewSet(BaseModelViewSet):
     queryset = CompetitionMemberConfirm.objects.all()
     serializer_class = CompetitionMemberConfirmSerializer
 
     def update(self, request, *args, **kwargs):
-
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
 
-        # 只允许更新 status 和 note 字段
+        # Only allow updating status and note fields
         data = {
-            'status': request.data.get('status'),
             'note': request.data.get('note', instance.note)
         }
+
+        if 'status' in request.data:
+            data['status'] = request.data.get('status')
 
         serializer = self.get_serializer(instance, data=data, partial=partial)
         serializer.is_valid(raise_exception=True)

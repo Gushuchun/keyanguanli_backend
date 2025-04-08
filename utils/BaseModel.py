@@ -1,6 +1,6 @@
 import uuid
 
-from django.db import models
+from django.db import models, transaction
 
 
 class BaseModel(models.Model):
@@ -13,6 +13,16 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+    def delete(self, using=None, keep_parents=False):
+        """重写delete方法实现软删除"""
+        with transaction.atomic():
+            self.state = 0
+            self.save()
+
+    def hard_delete(self):
+        """真实删除方法"""
+        super().delete()
 
 
 

@@ -17,8 +17,8 @@ class Competition(BaseModel):
     date = models.DateField('比赛日期')
     description = models.CharField('比赛描述', max_length=255)
     score = models.CharField('比赛成绩', max_length=100)
-    teacher = models.UUIDField('带队老师', max_length=50)
-    team_id = models.UUIDField('团队的uuid', max_length=100)
+    teacher_num = models.IntegerField('老师数量', default=0)
+    team_id = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
     file = models.FileField('证书图片', upload_to='competitions/', blank=True, null=True)
     status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
     note = models.TextField('备注', blank=True, null=True)
@@ -65,9 +65,11 @@ class CompetitionMemberConfirm(BaseModel):
 
     id = models.AutoField(primary_key=True)
     sn = models.UUIDField("比赛的uuid", max_length=100)
-    student = models.UUIDField('学生的uuid', max_length=100)
-    status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
+    student = models.UUIDField('学生的uuid', max_length=100, blank=True, null=True)
+    status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending', blank=True, null=True)
     note = models.TextField('备注', blank=True, null=True)
+    teacher = models.UUIDField('带队老师', max_length=100, blank=True, null=True)
+    is_cap = models.BooleanField('是否是队长', default=False)
 
     class Meta:
         app_label = 'competition'
