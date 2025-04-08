@@ -1,0 +1,104 @@
+from rest_framework import serializers
+from apps.competition.models import Competition, CompetitionMemberConfirm
+from apps.team.models import StudentToTeam, Team
+from django.db import transaction
+from rest_framework.exceptions import PermissionDenied, ValidationError
+from django.utils.translation import gettext_lazy as _
+
+class CompetitionSerializer(serializers.ModelSerializer):
+    note = serializers.CharField(required=False, allow_blank=True)
+
+    class Meta:
+        model = Competition
+        fields = ['sn', 'date', 'description', 'score', 'teacher', 'team_id', 'file', 'note', 'title']
+        extra_kwargs = {
+            'sn': {'read_only': True},
+            'status': {'read_only': True},
+            'team_id': {'required': True}
+        }
+
+    def validate(self, attrs):
+        # 获取当前用户
+        sn = self.context['request'].sn
+        team_id = attrs.get('team_id')
+        title = attrs.get('title')
+
+        # 检查用户是否是队长
+        try:
+            team = Team.objects.get(sn=team_id)
+            if team.cap != sn:
+                raise ValidationError("只有队长可以创建比赛信息")
+        except Team.DoesNotExist:
+            raise ValidationError("团队不存在")
+
+        if Competition.objects.filter(team_id=team_id, title=title).exists():
+            raise ValidationError("该团队已存在同名比赛，请更换比赛名称")
+
+        return attrs
+
+    def create(self, validated_data):
+        with transaction.atomic():
+            # 创建比赛记录
+            competition = Competition.objects.create(
+                **validated_data,
+                status='pending'
+            )
+
+            # 为每个团队成员创建确认记录
+            team_members = StudentToTeam.objects.filter(team=validated_data['team_id'], is_cap=False)
+            for member in team_members:
+                CompetitionMemberConfirm.objects.create(
+                    sn=competition.sn,
+                    student=member.student,
+                    status='pending'
+                )
+
+            return competition
+
+
+class CompetitionMemberConfirmSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompetitionMemberConfirm
+        fields = ['sn', 'student', 'status', 'note']
+        extra_kwargs = {
+            'sn': {'read_only': True},
+            'student': {'read_only': True},
+        }
+
+    def validate_status(self, value):
+        if value != 'confirmed':
+            raise serializers.ValidationError("状态只能更新为 'confirmed'")
+        return value
+
+    def validate(self, attrs):
+        # 确保请求用户是记录对应的学生
+        if str(self.context['request'].sn) != str(self.instance.student):
+            raise PermissionDenied("只能确认自己的参赛记录")
+        return attrs
+
+
+class CompetitionUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Competition
+        fields = [
+            'id', 'note', 'date', 'title', 'description',
+            'teacher', 'file', 'score', 'status'
+        ]
+        read_only_fields = ['id', 'status']  # status 禁止直接修改
+
+    def validate(self, attrs):
+        instance = self.instance
+
+        # 仅当是更新时校验状态
+        if instance and instance.status == 'confirmed':
+            raise serializers.ValidationError(_("比赛已确认，不能再修改"))
+
+        return attrs
+
+    def update(self, instance, validated_data):
+        allowed_fields = {'note', 'date', 'title', 'description', 'teacher', 'file', 'score'}
+        for field in list(validated_data.keys()):
+            if field not in allowed_fields:
+                raise serializers.ValidationError({field: _("不允许修改该字段")})
+
+        return super().update(instance, validated_data)

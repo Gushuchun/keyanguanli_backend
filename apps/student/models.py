@@ -16,12 +16,11 @@ class Student(BaseModel):
     username = models.CharField('姓名',max_length=50, unique=True)
     gender = models.BooleanField('性别', choices=GENDER_CHOICES)
     college_id = models.IntegerField('学院id')
-    cn = models.CharField('身份证', max_length=250, unique=True)
+    cn = models.CharField('身份证', max_length=250,)
     phone = models.CharField('电话', max_length=20)
-    team_id = models.CharField('团队id', max_length=100)
     prize_num = models.IntegerField('获奖总数', default=0)
     race_num = models.IntegerField('比赛总数', default=0)
-    is_cap = models.BooleanField('队长', default=False)
+    # is_cap = models.BooleanField('是否是队长', default=False)
     email = models.CharField('邮箱', blank=True, max_length=100)
 
     class Meta:
@@ -35,13 +34,14 @@ class Student(BaseModel):
 
     def get_cn(self):
         """解密身份证号"""
+        cn = cipher.decrypt(self.cn.encode()).decode()
         return cipher.decrypt(self.cn.encode()).decode()
 
     # 在保存模型之前自动加密身份证号
-    def save(self, *args, **kwargs):
-        if self.cn:
-            self.set_cn(self.cn)  # 自动加密 cn 字段
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.cn:
+    #         self.set_cn(self.cn)  # 自动加密 cn 字段
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return self.username

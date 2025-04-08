@@ -1,0 +1,1406 @@
+ERROR 2025-04-08 14:02:06,531 log Internal Server Error: /api/student/info/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\student\views\info.py", line 14, in list
+    user = Student.objects.get1(username=request.username, state=1)
+           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Manager' object has no attribute 'get1'
+ERROR 2025-04-08 15:03:47,080 info 更新用户信息错误: (1406, "Data too long for column 'cn' at row 1")
+ERROR 2025-04-08 15:03:47,082 log Internal Server Error: /api/student/info/3/
+ERROR 2025-04-08 15:03:52,790 info 更新用户信息错误: (1406, "Data too long for column 'cn' at row 1")
+ERROR 2025-04-08 15:03:52,790 log Internal Server Error: /api/student/info/3/
+ERROR 2025-04-08 15:04:07,487 info 更新用户信息错误: (1406, "Data too long for column 'cn' at row 1")
+ERROR 2025-04-08 15:04:07,489 log Internal Server Error: /api/student/info/3/
+ERROR 2025-04-08 15:04:27,585 info 更新用户信息错误: (1406, "Data too long for column 'cn' at row 1")
+ERROR 2025-04-08 15:04:27,586 log Internal Server Error: /api/student/info/3/
+ERROR 2025-04-08 15:04:43,422 info 更新用户信息错误: (1406, "Data too long for column 'cn' at row 1")
+ERROR 2025-04-08 15:04:43,423 log Internal Server Error: /api/student/info/3/
+ERROR 2025-04-08 15:04:49,664 info 更新用户信息错误: (1406, "Data too long for column 'cn' at row 1")
+ERROR 2025-04-08 15:04:49,665 log Internal Server Error: /api/student/info/3/
+ERROR 2025-04-08 15:11:45,920 log Internal Server Error: /api/user/register/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\user\views\register.py", line 36, in create
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\user\serializers\register.py", line 26, in create
+    email = validated_data['email']
+            ~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'email'
+ERROR 2025-04-08 15:23:01,227 info 更新用户信息错误: 'UserSerializer' object has no attribute 'get_cn'
+ERROR 2025-04-08 15:23:01,230 log Internal Server Error: /api/student/info/4/
+ERROR 2025-04-08 15:26:27,097 info 更新用户信息错误: You cannot call `.save()` after accessing `serializer.data`.If you need to access data before committing to the database then inspect 'serializer.validated_data' instead. 
+ERROR 2025-04-08 15:26:29,167 log Internal Server Error: /api/student/info/4/
+ERROR 2025-04-08 15:43:15,566 info 更新用户信息错误: JSON parse error - Expecting property name enclosed in double quotes: line 4 column 5 (char 58)
+ERROR 2025-04-08 15:43:15,567 log Internal Server Error: /api/teacher/info/1/
+ERROR 2025-04-08 17:04:00,529 log Internal Server Error: /api/team/create-team/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\backends\mysql\base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+MySQLdb.IntegrityError: (1048, "Column 'team_id' cannot be null")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\views\invite.py", line 28, in create
+    TeamInvite.objects.create(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\backends\mysql\base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1048, "Column 'team_id' cannot be null")
+ERROR 2025-04-08 17:48:47,380 log Internal Server Error: /api/team/create-team/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\views\invite.py", line 23, in create
+    if not serializer.is_valid():
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\serializers\invite.py", line 46, in validate
+    if teacher_id and not Teacher.objects.filter(user_id=teacher_id).exists():
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1491, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1303, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'user_id' into field. Choices are: college_id, create_time, email, gender, id, is_active, phone, sn, state, title, update_time, username
+ERROR 2025-04-08 17:50:12,046 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 17:51:18,220 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 17:52:46,455 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 17:53:28,715 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 17:53:43,445 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 17:54:47,165 log Internal Server Error: /api/team/create-team/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\views\invite.py", line 23, in create
+    if not serializer.is_valid():
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 442, in run_validation
+    value = self.to_internal_value(data)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 495, in to_internal_value
+    for field in fields:
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 378, in _writable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1079, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1175, in get_field_names
+    assert field_name in fields, (
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: The field 'teacher_id' was declared on serializer TeamCreateSerializer, but has not been included in the 'fields' option.
+ERROR 2025-04-08 17:55:29,893 log Internal Server Error: /api/team/create-team/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\views\invite.py", line 23, in create
+    if not serializer.is_valid():
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 442, in run_validation
+    value = self.to_internal_value(data)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 495, in to_internal_value
+    for field in fields:
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 378, in _writable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1079, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1175, in get_field_names
+    assert field_name in fields, (
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: The field 'teacher_id' was declared on serializer TeamCreateSerializer, but has not been included in the 'fields' option.
+ERROR 2025-04-08 18:36:54,804 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 18:38:35,866 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 18:38:37,339 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 19:03:00,559 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 19:05:00,737 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 19:06:25,076 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 19:38:28,742 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 19:50:35,490 log Internal Server Error: /api/team/create-team/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2123, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'ba978f6014884828b347a51a7a9293d8'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\views\invite.py", line 23, in create_team
+    if not serializer.is_valid():
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\serializers\invite.py", line 43, in validate
+    if not Student.objects.filter(id=member_id).exists():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2125, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got 'ba978f6014884828b347a51a7a9293d8'.
+ERROR 2025-04-08 19:52:06,269 log Internal Server Error: /api/team/create-team/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2123, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'ba978f6014884828b347a51a7a9293d8'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\views\invite.py", line 23, in create_team
+    if not serializer.is_valid():
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\serializers\invite.py", line 43, in validate
+    if not Student.objects.filter(id=member_id).exists():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2125, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got 'ba978f6014884828b347a51a7a9293d8'.
+ERROR 2025-04-08 19:52:46,117 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 19:53:19,345 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 19:53:25,911 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 20:13:32,481 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 20:15:30,613 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 20:16:28,750 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 20:17:10,097 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 20:18:22,557 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 20:18:44,414 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 20:23:29,265 log Internal Server Error: /api/team/create-team/
+ERROR 2025-04-08 21:04:07,157 log Internal Server Error: /api/team/confirm-team/
+ERROR 2025-04-08 21:11:40,502 log Internal Server Error: /api/team/invite_new_teacher/
+ERROR 2025-04-08 21:13:09,555 log Internal Server Error: /api/team/invite_new_teacher/
+ERROR 2025-04-08 22:25:00,209 log Internal Server Error: /api/competition/confirm
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\utils\deprecation.py", line 131, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via PUT, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining PUT data. Change your form to point to 127.0.0.1:8105/api/competition/confirm/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2025-04-08 22:26:07,950 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 52, in update
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                                            ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'HTTP_200_OK'
+ERROR 2025-04-08 22:27:26,476 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 52, in update
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                                            ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'HTTP_200_OK'
+ERROR 2025-04-08 22:28:08,801 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 56, in update
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                                            ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'HTTP_200_OK'
+ERROR 2025-04-08 22:28:50,894 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 56, in update
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                                            ^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'HTTP_200_OK'
+ERROR 2025-04-08 22:39:58,927 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2761, in to_python
+    return uuid.UUID(**{input_form: value})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\uuid.py", line 175, in __init__
+    hex = hex.replace('urn:', '').replace('uuid:', '')
+          ^^^^^^^^^^^
+AttributeError: 'Competition' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 45, in update
+    self.perform_update(serializer)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\mixins.py", line 78, in perform_update
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 203, in save
+    self.instance = self.update(self.instance, validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1033, in update
+    instance.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\siginal.py", line 15, in update_competition_status
+    competition = Competition.objects.select_for_update().get(sn=instance.sn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2745, in get_prep_value
+    return self.to_python(value)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2763, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“Competition object (1)” is not a valid UUID.']
+ERROR 2025-04-08 22:40:45,603 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2761, in to_python
+    return uuid.UUID(**{input_form: value})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\uuid.py", line 175, in __init__
+    hex = hex.replace('urn:', '').replace('uuid:', '')
+          ^^^^^^^^^^^
+AttributeError: 'Competition' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 45, in update
+    self.perform_update(serializer)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\mixins.py", line 78, in perform_update
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 203, in save
+    self.instance = self.update(self.instance, validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1033, in update
+    instance.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\siginal.py", line 13, in update_competition_status
+    competition = Competition.objects.select_for_update().get(sn=instance.sn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2745, in get_prep_value
+    return self.to_python(value)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2763, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“Competition object (1)” is not a valid UUID.']
+ERROR 2025-04-08 22:42:03,000 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2761, in to_python
+    return uuid.UUID(**{input_form: value})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\uuid.py", line 175, in __init__
+    hex = hex.replace('urn:', '').replace('uuid:', '')
+          ^^^^^^^^^^^
+AttributeError: 'Competition' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 45, in update
+    self.perform_update(serializer)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\mixins.py", line 78, in perform_update
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 203, in save
+    self.instance = self.update(self.instance, validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1033, in update
+    instance.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\siginal.py", line 13, in update_competition_status
+    competition = Competition.objects.get(sn=instance.sn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2745, in get_prep_value
+    return self.to_python(value)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2763, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“Competition object (1)” is not a valid UUID.']
+ERROR 2025-04-08 22:42:46,421 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2761, in to_python
+    return uuid.UUID(**{input_form: value})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\uuid.py", line 175, in __init__
+    hex = hex.replace('urn:', '').replace('uuid:', '')
+          ^^^^^^^^^^^
+AttributeError: 'Competition' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 45, in update
+    self.perform_update(serializer)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\mixins.py", line 78, in perform_update
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 203, in save
+    self.instance = self.update(self.instance, validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1033, in update
+    instance.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\siginal.py", line 13, in update_competition_status
+    competition = Competition.objects.select_for_update().get(sn=instance.sn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2745, in get_prep_value
+    return self.to_python(value)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2763, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“Competition object (1)” is not a valid UUID.']
+ERROR 2025-04-08 22:42:54,935 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2761, in to_python
+    return uuid.UUID(**{input_form: value})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\uuid.py", line 175, in __init__
+    hex = hex.replace('urn:', '').replace('uuid:', '')
+          ^^^^^^^^^^^
+AttributeError: 'Competition' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 45, in update
+    self.perform_update(serializer)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\mixins.py", line 78, in perform_update
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 203, in save
+    self.instance = self.update(self.instance, validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1033, in update
+    instance.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\siginal.py", line 13, in update_competition_status
+    competition = Competition.objects.select_for_update().get(sn=instance.sn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2745, in get_prep_value
+    return self.to_python(value)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2763, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“Competition object (1)” is not a valid UUID.']
+ERROR 2025-04-08 22:43:09,611 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2761, in to_python
+    return uuid.UUID(**{input_form: value})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\uuid.py", line 175, in __init__
+    hex = hex.replace('urn:', '').replace('uuid:', '')
+          ^^^^^^^^^^^
+AttributeError: 'Competition' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 45, in update
+    self.perform_update(serializer)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\mixins.py", line 78, in perform_update
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 203, in save
+    self.instance = self.update(self.instance, validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1033, in update
+    instance.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\siginal.py", line 13, in update_competition_status
+    competition = Competition.objects.get(sn=instance.sn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2745, in get_prep_value
+    return self.to_python(value)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2763, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“Competition object (1)” is not a valid UUID.']
+ERROR 2025-04-08 22:43:41,845 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2761, in to_python
+    return uuid.UUID(**{input_form: value})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\uuid.py", line 175, in __init__
+    hex = hex.replace('urn:', '').replace('uuid:', '')
+          ^^^^^^^^^^^
+AttributeError: 'Competition' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 45, in update
+    self.perform_update(serializer)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\mixins.py", line 78, in perform_update
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 203, in save
+    self.instance = self.update(self.instance, validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 1033, in update
+    instance.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\siginal.py", line 13, in update_competition_status
+    competition = Competition.objects.get(sn=instance.sn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1555, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1385, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 369, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2745, in get_prep_value
+    return self.to_python(value)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\fields\__init__.py", line 2763, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“Competition object (1)” is not a valid UUID.']
+ERROR 2025-04-08 22:46:20,692 log Internal Server Error: /api/competition/confirm/1/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\competition\views\views.py", line 45, in update
+    self.perform_update(serializer)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\mixins.py", line 78, in perform_update
+    serializer.save()
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\serializers.py", line 194, in save
+    assert not hasattr(self, '_data'), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: You cannot call `.save()` after accessing `serializer.data`.If you need to access data before committing to the database then inspect 'serializer.validated_data' instead. 
+ERROR 2025-04-08 23:09:53,101 log Internal Server Error: /api/competition/
+ERROR 2025-04-08 23:11:03,409 log Internal Server Error: /api/competition/
+ERROR 2025-04-08 23:11:24,519 log Internal Server Error: /api/competition/
+ERROR 2025-04-08 23:11:27,774 log Internal Server Error: /api/competition/
+ERROR 2025-04-08 23:11:43,802 log Internal Server Error: /api/competition/
+ERROR 2025-04-08 23:12:20,113 log Internal Server Error: /api/competition/
+ERROR 2025-04-08 23:13:13,490 log Internal Server Error: /api/competition/
+ERROR 2025-04-08 23:13:37,408 log Internal Server Error: /api/competition/
+ERROR 2025-04-08 23:41:58,917 log Internal Server Error: /api/team/myteam/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\views\team.py", line 24, in list_my_team
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\Senior2\Graduation_Proj\graduation_django_backend\graduation_django_backend\apps\team\views\team.py", line 18, in get_queryset
+    return Team.objects.filter(members__student=self.request.user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1491, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1303, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\db\models\sql\query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'members' into field. Choices are: cap, create_time, id, name, people_num, prize_num, race_num, sn, state, teacher_num, update_time
+ERROR 2025-04-08 23:57:48,365 log Internal Server Error: /api/team/dismiss/9/
+Traceback (most recent call last):
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\wyb\studyandwork\development\Anaconda\envs\graduation_django_backend\Lib\site-packages\rest_framework\views.py", line 423, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Expected a `Response`, `HttpResponse` or `StreamingHttpResponse` to be returned from the view, but received a `<class 'NoneType'>`

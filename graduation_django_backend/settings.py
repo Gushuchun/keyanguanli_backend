@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    'corsheaders',
     "apps.user",
     "apps.team",
     "apps.competition",
@@ -51,13 +53,57 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "utils.csrf_middleware.NotUseCsrfTokenMiddlewareMixin",
     # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "utils.token_auth_middleware.TokenAuthMiddleware",  # 添加token验证中间件
 ]
+
+# 跨域增加忽略
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = [
+    "http://*",
+    "https://*",
+]
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+    'VIEW',
+)
+CORS_ALLOW_HEADERS = (
+    'XMLHttpRequest',
+    'X_FILENAME',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'cache-control',
+    'x-token',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma',
+)
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
 
 ROOT_URLCONF = "graduation_django_backend.urls"
 
@@ -119,11 +165,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Shanghai"
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -164,6 +210,7 @@ LOGGING = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'file_team': {
@@ -173,6 +220,7 @@ LOGGING = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'file_competition': {
@@ -182,6 +230,7 @@ LOGGING = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'file_admin': {
@@ -191,6 +240,7 @@ LOGGING = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'file_college': {
@@ -200,6 +250,7 @@ LOGGING = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'file_teacher': {
@@ -209,6 +260,7 @@ LOGGING = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'file_student': {
@@ -218,6 +270,7 @@ LOGGING = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'file_all': {
@@ -227,15 +280,27 @@ LOGGING = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'file_error': {
-            'level': 'ERROR',  # 只记录 ERROR 及以上级别
+            'level': 'DEBUG',  # 只记录 ERROR 及以上级别
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs', 'error.log'),
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
+            'delay': True,
+            'formatter': 'verbose',
+        },
+        'file_security': {
+            'level': 'WARNING',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'security.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'delay': True,
             'formatter': 'verbose',
         },
         'console': {
@@ -286,6 +351,11 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+        'security': {
+            'handlers': ['file_security', 'file_all', 'file_error', 'console'],
+            'level': 'WARNING',  # 只关注警告及以上级别（可根据需要改为 INFO）
+            'propagate': False,
+        },
         # 捕获所有未指定的日志
         '': {
             'handlers': ['file_all', 'file_error' ,'console'],
@@ -297,15 +367,15 @@ LOGGING = {
             'handlers': [],
             'propagate': False,
         },
-        'django.request': {
-            'handlers': ['file_error'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.server': {
-            'handlers': ['file_error'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
+        # 'django.request': {
+        #     'handlers': ['file_error'],
+        #     'level': 'ERROR',
+        #     'propagate': False,
+        # },
+        # 'django.server': {
+        #     'handlers': ['file_error'],
+        #     'level': 'ERROR',
+        #     'propagate': False,
+        # },
     },
 }

@@ -20,4 +20,7 @@ from apps.user import urls as user_urls
 urlpatterns = [
     path('api/user/', include(user_urls)),
     path('api/student/', include('apps.student.urls')),
+    path('api/teacher/', include('apps.teacher.urls')),
+    path('api/team/', include('apps.team.urls')),
+    path('api/competition/', include('apps.competition.urls')),
 ]

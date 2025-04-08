@@ -52,6 +52,7 @@ class StudentRegistrationSerializer(BaseRegistrationSerializer):
             student = Student.objects.create(
                 **validated_data
             )
+            student.set_cn(validated_data['cn'])
             # 返回学生对象
             return student
 

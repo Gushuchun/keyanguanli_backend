@@ -15,6 +15,7 @@ class BaseModel(models.Model):
         abstract = True
 
 
+
 class BaseIdModel(BaseModel):
     id = models.AutoField(primary_key=True, verbose_name="id")
 

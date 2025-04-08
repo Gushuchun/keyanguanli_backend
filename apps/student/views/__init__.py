@@ -1,1 +1,1 @@
-from .info import UserInfoViewSet
+from .info import *

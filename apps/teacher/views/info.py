@@ -1,8 +1,8 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework import status
 from rest_framework.response import Response
-from apps.student.models import Student
-from apps.student.serializers import StudentSerializer
+from apps.teacher.models import Teacher
+from apps.teacher.serializers import TeacherInfoSerializer
 import logging
 
 logger = logging.getLogger('student')
@@ -10,17 +10,17 @@ logger = logging.getLogger('student')
 from django.views.decorators.csrf import csrf_exempt
 
 # @csrf_exempt
-class StudentInfoViewSet(ViewSet):
+class TeacherInfoViewSet(ViewSet):
     def list(self, request):
         """获取用户信息"""
         try:
-            user = Student.objects.get(username=request.username, state=1)
-            serializer = StudentSerializer(user)
+            user = Teacher.objects.get(username=request.username, state=1)
+            serializer = TeacherInfoSerializer(user)
 
             logger.info(f"用户 {user.username} 查询个人信息成功")
             return Response(serializer.data)
 
-        except Student.DoesNotExist:
+        except Teacher.DoesNotExist:
             logger.info(f"用户 {request.username} 不存在")
             return Response(
                 {'error': '用户不存在'},
@@ -30,7 +30,7 @@ class StudentInfoViewSet(ViewSet):
     def update(self, request, pk=None):
         """更新用户信息"""
         try:
-            current_user = Student.objects.get(username=request.username, state=1)
+            current_user = Teacher.objects.get(username=request.username, state=1)
 
             # 权限验证
             if str(current_user.id) != pk:
@@ -40,10 +40,10 @@ class StudentInfoViewSet(ViewSet):
                     status=status.HTTP_403_FORBIDDEN
                 )
 
-            user = Student.objects.get(id=pk)
+            user = Teacher.objects.get(id=pk)
 
             # 使用Serializer处理
-            serializer = StudentSerializer(
+            serializer = TeacherInfoSerializer(
                 user,
                 data=request.data,
                 partial=True,
@@ -65,10 +65,10 @@ class StudentInfoViewSet(ViewSet):
             logger.info(f"用户 {current_user.username} 更新信息成功")
             return Response({
                 'message': '信息更新成功',
-                'data': StudentSerializer(user).data  # 返回完整序列化数据
+                'data': TeacherInfoSerializer(user).data  # 返回完整序列化数据
             })
 
-        except Student.DoesNotExist:
+        except Teacher.DoesNotExist:
             logger.info(f"用户ID {pk} 不存在")
             return Response(
                 {'error': '用户不存在'},
