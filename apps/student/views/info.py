@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from apps.student.models import Student
 from apps.student.serializers import UserSerializer
+import logging
+
+logger = logging.getLogger('student')
 
 class UserInfoViewSet(viewsets.ViewSet):
 
@@ -14,6 +17,8 @@ class UserInfoViewSet(viewsets.ViewSet):
         try:
             user_info = Student.objects.get(id=user.id)
             # 返回用户信息
+
+            logger.info(f"用户 {user.username} 查询个人信息成功")
             return Response({
                 'user_id': user_info.id,
                 'username': user_info.username,
@@ -27,7 +32,9 @@ class UserInfoViewSet(viewsets.ViewSet):
                 'is_cap': user_info.is_cap,
                 'college_id': user_info.college_id
             })
+
         except Student.DoesNotExist:
+            logger.info(f"用户 {user.username} 查询个人信息失败: 用户不存在")
             return Response({'error': '用户不存在'}, status=404)
 
     @action(detail=False, methods=['put'])

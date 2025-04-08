@@ -4,6 +4,9 @@ from rest_framework import status
 from django.contrib.auth import authenticate
 from apps.user.models import UserModel
 from utils.token_utils import generate_token
+import logging
+
+logger = logging.getLogger('user')
 
 class LoginView(APIView):
     def post(self, request):
@@ -17,6 +20,8 @@ class LoginView(APIView):
         if user is not None:
             # 生成 JWT token
             token = generate_token(user.id, user.role)
+
+            logger.info(f'用户{user.username}登录成功')
             return Response({
                 'token': token,
                 'user_id': user.id,

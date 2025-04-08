@@ -1,11 +1,11 @@
 import jwt
 from django.http import JsonResponse
 from django.conf import settings
-from rest_framework import status
 from django.utils.deprecation import MiddlewareMixin
-
 from django.contrib.auth import get_user_model
+import logging
 
+logger = logging.getLogger('user')
 
 class TokenAuthMiddleware(MiddlewareMixin):
     def process_request(self, request):
@@ -13,9 +13,25 @@ class TokenAuthMiddleware(MiddlewareMixin):
         if request.path in ['/api/user/login/', '/api/user/register/']:
             return None
 
-        token = request.headers.get('Authorization')
-        if not token:
-            return JsonResponse({'error': '未提供token'}, status=401)
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            logger.info('未提供认证信息')
+            return JsonResponse({'error': '未提供认证信息'}, status=401)
+
+        # 检查并提取JWT token
+        try:
+            # 分割"Bearer "或"JWT "前缀
+            parts = auth_header.split()
+            if len(parts) != 2:
+                raise ValueError("请求头头格式错误")
+
+            scheme, token = parts
+            if scheme.lower() not in ('bearer', 'jwt'):
+                raise ValueError("认证方案不支持")
+
+        except ValueError as e:
+            logger.info('请求头头格式错误')
+            return JsonResponse({'error': str(e)}, status=401)
 
         try:
             # 解码 token 时，验证过期时间和签名
@@ -28,10 +44,13 @@ class TokenAuthMiddleware(MiddlewareMixin):
             request.role = payload['role']
 
         except jwt.ExpiredSignatureError:
+            logger.info('token已过期')
             return JsonResponse({'error': 'token已过期'}, status=401)
         except jwt.InvalidTokenError:
+            logger.info('无效的token')
             return JsonResponse({'error': '无效的token'}, status=401)
         except User.DoesNotExist:
+            logger.info('用户不存在')
             return JsonResponse({'error': '用户不存在'}, status=401)
 
         return None

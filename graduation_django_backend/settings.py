@@ -137,3 +137,175 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 FERNET_KEY=os.environ.get('FERNET_KEY')
+
+log_dir = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+# 日志配置
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file_user': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'user.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'file_team': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'team.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'file_competition': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'competition.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'file_admin': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'admin.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'file_college': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'college.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'file_teacher': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'teacher.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'file_student': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'student.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'file_all': {
+            'level': 'DEBUG',  # 记录所有日志（DEBUG 及以上级别）
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'all.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'file_error': {
+            'level': 'ERROR',  # 只记录 ERROR 及以上级别
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'error.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'filters': {
+        'no_warnings': {
+            '()': 'logging.Filter',
+            'name': 'warning',
+        },
+    },
+    'loggers': {
+        'user': {
+            'handlers': ['file_user', 'file_all', 'file_error' ,'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'team': {
+            'handlers': ['file_team', 'file_all', 'file_error' ,'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'competition': {
+            'handlers': ['file_competition', 'file_all', 'file_error' ,'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'admin': {
+            'handlers': ['file_admin', 'file_all', 'file_error' ,'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'college': {
+            'handlers': ['file_college', 'file_all', 'file_error' ,'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'teacher': {
+            'handlers': ['file_teacher', 'file_all', 'file_error' ,'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'student': {
+            'handlers': ['file_student', 'file_all', 'file_error' ,'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        # 捕获所有未指定的日志
+        '': {
+            'handlers': ['file_all', 'file_error' ,'console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # 避免捕获到 all.log
+        'django.utils.autoreload': {
+            'handlers': [],
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['file_error'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.server': {
+            'handlers': ['file_error'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
