@@ -1,7 +1,7 @@
 # users/models.py
 from django.db import models
 import uuid
-from utils.BaseModel import BaseModel
+from utils.baseModel import BaseModel
 from cryptography.fernet import Fernet
 from django.conf import settings
 
@@ -22,6 +22,7 @@ class Student(BaseModel):
     race_num = models.IntegerField('比赛总数', default=0)
     # is_cap = models.BooleanField('是否是队长', default=False)
     email = models.CharField('邮箱', blank=True, max_length=100)
+    avatar = models.CharField('头像', blank=True, null=True, max_length=255)
 
     class Meta:
         app_label = 'student'

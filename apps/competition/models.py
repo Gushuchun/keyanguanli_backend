@@ -2,7 +2,7 @@ from django.db import models, transaction
 import uuid
 
 from apps.team.models import Team
-from utils.BaseModel import BaseModel
+from utils.baseModel import BaseModel
 
 
 class Competition(BaseModel):
@@ -15,11 +15,11 @@ class Competition(BaseModel):
     sn = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     title = models.CharField('比赛名称', max_length=100)
     date = models.DateField('比赛日期')
-    description = models.CharField('比赛描述', max_length=255)
+    description = models.CharField('比赛描述', max_length=1000)
     score = models.CharField('比赛成绩', max_length=100)
     teacher_num = models.IntegerField('老师数量', default=0)
     team_id = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
-    file = models.FileField('证书图片', upload_to='competitions/', blank=True, null=True)
+    file = models.CharField("证书图片地址", max_length=255)
     status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
     note = models.TextField('备注', blank=True, null=True)
 

@@ -15,4 +15,5 @@ urlpatterns = [
     path('allteam/', TeamViewSet.as_view({'get': 'list_all_team'}), name='all-team'),
     path('dismiss/<int:pk>/', TeamViewSet.as_view({'delete': 'dismiss_team'}), name='dismiss-team'),
     path('update/<int:pk>/', TeamViewSet.as_view({'put': 'update_team'}), name='update-team'),
+    path('quit/<int:pk>/', TeamViewSet.as_view({'put': 'quit_team'}), name='quit-team')
 ] + router.urls

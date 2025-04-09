@@ -1,6 +1,6 @@
 # teams/models.py
 from django.db import models
-from utils.BaseModel import BaseModel
+from utils.baseModel import BaseModel
 import uuid
 from apps.teacher.models import Teacher
 from django.db import models, transaction
@@ -89,6 +89,10 @@ class StudentToTeam(BaseModel):
         db_table = 'student_to_team'
         verbose_name = '学生-团队表'
         verbose_name_plural = '学生-团队表'
+
+    @classmethod
+    def get_team_by_sn(cls, team_sn):
+        return Team.objects.get(sn=team_sn, state=1)
 
 class TeacherToTeam(BaseModel):
     id = models.AutoField(primary_key=True)

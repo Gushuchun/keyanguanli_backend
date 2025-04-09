@@ -7,4 +7,5 @@ router.register(r'info', StudentInfoViewSet, basename='info')
 
 urlpatterns = [
     path('', include(router.urls)),
+# path('info/update_avatar/', StudentInfoViewSet.as_view({'post': 'update_avatar'}), name='update_avatar'),
 ]

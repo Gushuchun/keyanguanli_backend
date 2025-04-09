@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from apps.competition.models import Competition, CompetitionMemberConfirm
 from apps.competition.serializers import CompetitionSerializer, CompetitionMemberConfirmSerializer, CompetitionUpdateSerializer
 from apps.team.models import StudentToTeam, Team
-from utils.BaseView import BaseModelViewSet
+from utils.baseView import BaseModelViewSet
 import logging
 from rest_framework.decorators import action
 

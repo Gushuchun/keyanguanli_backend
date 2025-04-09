@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -8,7 +9,7 @@ from apps.team.models import Team, StudentToTeam, TeacherToTeam
 from apps.team.serializers import TeamSerializer, AllTeamSerializer, TeamUpdateSerializer
 import logging
 
-from utils.BaseView import BaseModelViewSet
+from utils.baseView import BaseModelViewSet
 
 # logger = logging.getLogger('team')
 logger_security = logging.getLogger('security')
@@ -81,3 +82,26 @@ class TeamViewSet(BaseModelViewSet):
         self.perform_update(serializer)
 
         return Response({"message": "团队信息已更新", "code": 200, "data": serializer.data})
+
+    @action(detail=False, methods=['put'])
+    def quit_team(self, request, pk=None):
+        """退出团队"""
+        with transaction.atomic():
+            team_sn = Team.objects.filter(id=pk).first().sn
+            student_sn = request.sn
+
+            student_to_team = StudentToTeam.objects.filter(
+                team=team_sn,
+                student=student_sn,
+                state=1
+            ).first()
+
+            if not student_to_team:
+                return Response({"message": "用户不在该团队中", "code": 400}, status=400)
+
+            team = student_to_team.get_team_by_sn(team_sn)
+            team.people_num -= 1
+            team.save()
+            student_to_team.hard_delete()
+
+        return Response({"message": "退出团队成功", "code": 200})

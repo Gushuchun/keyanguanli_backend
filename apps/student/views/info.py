@@ -1,8 +1,9 @@
+from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 from rest_framework import status
 from rest_framework.response import Response
 from apps.student.models import Student
-from apps.student.serializers import StudentSerializer
+from apps.student.serializers import StudentSerializer, StudentAvatarSerializer
 import logging
 
 logger = logging.getLogger('student')
@@ -79,4 +80,45 @@ class StudentInfoViewSet(ViewSet):
             return Response(
                 {'error': '服务器内部错误'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    @action(detail=False, methods=['post'])
+    def update_avatar(self, request):
+        """更新用户头像"""
+        try:
+            current_user = Student.objects.get(sn=request.sn, state=1)
+
+            # 获取并验证上传的文件
+            avatar = request.FILES.get('avatar')
+            if not avatar:
+                return Response(
+                    {'message': '没有上传头像', 'code': 400},
+                )
+
+            # 使用头像序列化器处理头像上传
+            serializer = StudentAvatarSerializer(current_user, data={'avatar': avatar}, partial=True)
+
+            if not serializer.is_valid():
+                logger.info(f"用户 {current_user.username} 上传头像失败: {serializer.errors}")
+                return Response(
+                    {'message': '头像上传失败', 'data': serializer.errors, 'code': 400}
+                )
+
+            serializer.save()
+
+            logger.info(f"用户 {current_user.username} 上传头像成功")
+            return Response({
+                'message': '头像上传成功',
+                'data': StudentSerializer(current_user).data
+            })
+
+        except Student.DoesNotExist:
+            logger.warning(f"用户 {request.sn} 不存在")
+            return Response(
+                {'message': '用户不存在', 'code': 404}
+            )
+        except Exception as e:
+            logger.error(f"更新头像失败: {str(e)}")
+            return Response(
+                {'message': '服务器内部错误', 'code': 500},
             )

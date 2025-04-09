@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# token加密密钥
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "rest_framework",
     'corsheaders',
     'django_extensions',
+    'minio_storage',
     "apps.user",
     "apps.team",
     "apps.competition",
@@ -133,14 +134,26 @@ WSGI_APPLICATION = "graduation_django_backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "uim_db",
-        "USER": "root",
-        "PASSWORD": "123456jl",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "ENGINE": os.getenv('DB_ENGINE', 'django.db.backends.mysql'),
+        "NAME": os.getenv('DB_NAME', 'uim_db'),
+        "USER": os.getenv('DB_USER', 'root'),
+        "PASSWORD": os.getenv('DB_PASSWORD', '123456jl'),
+        "HOST": os.getenv('DB_HOST', 'localhost'),
+        "PORT": os.getenv('DB_PORT', '3306'),
     }
 }
+
+# MINIO配置
+MINIO_STORAGE_ENDPOINT = os.getenv('MINIO_STORAGE_ENDPOINT', '192.168.43.238:9000')
+MINIO_STORAGE_ACCESS_KEY = os.getenv('MINIO_STORAGE_ACCESS_KEY', 'minioadmin')
+MINIO_STORAGE_SECRET_KEY = os.getenv('MINIO_STORAGE_SECRET_KEY', 'minioadmin')
+MINIO_STORAGE_USE_HTTPS = os.getenv('MINIO_STORAGE_USE_HTTPS', 'False') == 'True'
+MINIO_MAX_UPLOAD_SIZE = int(os.getenv('MINIO_MAX_UPLOAD_SIZE', 5 * 1024 * 1024))
+MINIO_STORAGE_MEDIA_BUCKET_NAME = os.getenv('MINIO_STORAGE_MEDIA_BUCKET_NAME', 'media')
+MINIO_STORAGE_MEDIA_COMPETITIONS = os.getenv('MINIO_STORAGE_MEDIA_COMPETITIONS', 'competitions')
+MINIO_STORAGE_MEDIA_AVATAR = os.getenv('MINIO_STORAGE_MEDIA_AVATAR', 'avatar')
+MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = os.getenv('MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET', 'True') == 'True'
+MINIO_SECURE = os.getenv('MINIO_SECURE', 'True') == 'True'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -183,6 +196,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# 身份证加密密钥
 FERNET_KEY=os.environ.get('FERNET_KEY')
 
 log_dir = os.path.join(BASE_DIR, 'logs')
