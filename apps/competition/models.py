@@ -1,6 +1,7 @@
 from django.db import models, transaction
 import uuid
 
+from apps.teacher.models import Teacher
 from apps.team.models import Team
 from utils.baseModel import BaseModel
 
@@ -57,6 +58,62 @@ class Competition(BaseModel):
                 return team.cap
         return None
 
+    @classmethod
+    def get_teacher(cls, id):
+        competition = cls.objects.filter(id=id).first()
+        if competition:
+            team_list = TeacherToCompetition.objects.filter(competition=competition.sn)
+
+            teacher_sns = [team.teacher for team in team_list]
+            teachers = Teacher.objects.filter(sn__in=teacher_sns)
+
+            return teachers
+        return None
+
+class StudentToCompetition(BaseModel):
+    STATUS_CHOICES = [
+        ('pending', '待确认'),
+        ('confirmed', '已确认'),
+    ]
+    id = models.AutoField(primary_key=True)
+    sn = models.UUIDField("比赛的uuid", max_length=100)
+    student = models.UUIDField('学生的uuid', max_length=100, blank=True, null=True)
+    team = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
+    competition = models.UUIDField('比赛的uuid', max_length=100)
+    status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending', blank=True, null=True)
+    note = models.TextField('备注', blank=True, null=True)
+    is_cap = models.BooleanField('是否是队长', default=False)
+
+    class Meta:
+        app_label = 'competition'
+        db_table = 'student_to_competition'
+        verbose_name = '学生比赛信息表'
+        verbose_name_plural = verbose_name
+
+
+class TeacherToCompetition(BaseModel):
+    STATUS_CHOICES = [
+        ('pending', '待确认'),
+        ('confirmed', '已确认'),
+    ]
+    id = models.AutoField(primary_key=True)
+    sn = models.UUIDField("比赛的uuid", max_length=100)
+    teacher = models.UUIDField('老师的uuid', max_length=100, blank=True, null=True)
+    team = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
+    competition = models.UUIDField('比赛的uuid', max_length=100)
+    status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending', blank=True, null=True)
+    note = models.TextField('备注', blank=True, null=True)
+
+    class Meta:
+        app_label = 'competition'
+        db_table = 'teacher_to_competition'
+        verbose_name = '老师比赛信息表'
+        verbose_name_plural = verbose_name
+
+
+# 该模型为初版记录老师学生对应的比赛及确认的状态，
+# 功能已转移到TeacherToCompetition和StudentToCompetition，
+# 已不再使用
 class CompetitionMemberConfirm(BaseModel):
     STATUS_CHOICES = [
         ('pending', '待确认'),
