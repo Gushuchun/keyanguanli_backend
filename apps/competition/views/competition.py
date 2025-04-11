@@ -1,10 +1,8 @@
-from django.db.models import Q
-from rest_framework import viewsets, status
+from rest_framework import status
 from rest_framework.response import Response
-from apps.competition.models import Competition, CompetitionMemberConfirm
-from apps.competition.serializers import CompetitionSerializer, CompetitionMemberConfirmSerializer, CompetitionUpdateSerializer
-from apps.team.models import StudentToTeam, Team
-from utils.baseView import BaseModelViewSet
+from apps.competition.models import Competition, StudentToCompetition, TeacherToCompetition
+from apps.competition.serializers import CompetitionSerializer, CompetitionMemberConfirmSerializer, CompetitionUpdateSerializer, CompetitionTeacherConfirmSerializer
+from utils.base.baseView import BaseModelViewSet
 import logging
 from rest_framework.decorators import action
 
@@ -66,30 +64,28 @@ class CompetitionViewSet(BaseModelViewSet):
 
     @action(detail=False, methods=['get'], url_path='my')
     def my_competitions(self, request):
+        competition_sns = []
 
-        # 1. 获取用户已确认的比赛ID列表（包括作为学生和老师）
-        confirmed_as_student = CompetitionMemberConfirm.objects.filter(
-            student=request.sn,
-            status='confirmed',
-            state=1
-        ).values_list('sn', flat=True)
+        if request.role == 'teacher':
+            competition_sns = TeacherToCompetition.objects.filter(
+                teacher=request.sn,
+                state=1,
+                status='confirmed'
+            ).values_list('competition', flat=True)
+        elif request.role == 'student':
+            competition_sns = StudentToCompetition.objects.filter(
+                student=request.sn,
+                state=1,
+                status='confirmed'
+            ).values_list('competition', flat=True)
 
-        confirmed_as_teacher = CompetitionMemberConfirm.objects.filter(
-            teacher=request.sn,
-            status='confirmed',
-            state=1
-        ).values_list('sn', flat=True)
-
-        # 合并并去重
-        all_competition_ids = list(set(confirmed_as_student) | set(confirmed_as_teacher))
-
-        # 2. 获取完整的比赛信息
+        # 根据比赛编号查找实际的比赛对象
         competitions = Competition.objects.filter(
-            sn__in=all_competition_ids,
+            sn__in=competition_sns,
             state=1
-        ).order_by('-date')  # 按日期降序
+        )
 
-        # 3. 分页处理
+        # 分页处理
         page = self.paginate_queryset(competitions)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
@@ -143,15 +139,36 @@ class CompetitionViewSet(BaseModelViewSet):
         return Response({"message": "获取成功", "data": serializer.data, "code": 200})
 
 
-class CompetitionConfirmViewSet(BaseModelViewSet):
-    queryset = CompetitionMemberConfirm.objects.all()
+class CompetitionStudentConfirmViewSet(BaseModelViewSet):
+    queryset = StudentToCompetition.objects.filter(state=1)
     serializer_class = CompetitionMemberConfirmSerializer
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
 
-        # Only allow updating status and note fields
+        data = {
+            'note': request.data.get('note', instance.note)
+        }
+
+        if 'status' in request.data:
+            data['status'] = request.data.get('status')
+
+        serializer = self.get_serializer(instance, data=data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
+
+
+class CompetitionTeacherConfirmViewSet(BaseModelViewSet):
+    queryset = TeacherToCompetition.objects.all()
+    serializer_class = CompetitionTeacherConfirmSerializer
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+
         data = {
             'note': request.data.get('note', instance.note)
         }
