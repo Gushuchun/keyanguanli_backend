@@ -8,9 +8,10 @@ from utils.response_formatter import format_validation_error, format_permission_
 
 logger = logging.getLogger(__name__)
 
+
 class BaseModelViewSet(viewsets.ModelViewSet):
     """
-    继承 ModelViewSet，统一处理常见异常
+    继承 ModelViewSet，统一处理常见异常和分页逻辑
     """
 
     def handle_exception(self, exc):
@@ -26,3 +27,29 @@ class BaseModelViewSet(viewsets.ModelViewSet):
                 "message": "内部服务器错误",
                 "error": str(exc)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def paginate_and_serialize_queryset(self, queryset, custom_serializer=None):
+        """
+        对查询集进行分页处理并序列化
+
+        参数:
+            queryset: 要分页的查询集
+            custom_serializer: 可选，自定义序列化器类实例
+
+        返回:
+            Response: 包含序列化和分页数据的响应
+        """
+        # 分页处理
+        page = self.paginate_queryset(queryset)
+
+        # 使用自定义序列化器或默认序列化器
+        serializer = custom_serializer if custom_serializer else self.get_serializer
+
+        if page is not None:
+            serialized_data = serializer(page, many=True).data
+            return self.get_paginated_response(serialized_data)
+
+        # 如果没有分页，序列化所有数据
+        serialized_data = serializer(queryset, many=True).data
+        return Response({"message": "获取成功", "code": 200, "data": serialized_data})
+
