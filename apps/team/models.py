@@ -1,6 +1,5 @@
 # teams/models.py
-from django.db import models
-from utils.baseModel import BaseModel
+from utils.base.baseModel import BaseModel
 import uuid
 from apps.teacher.models import Teacher
 from django.db import models, transaction
@@ -52,37 +51,19 @@ class Team(BaseModel):
         super().delete()
 
 
-class TeamInvite(BaseModel):
-    STATUS_CHOICES = (
-        ('0', '待接受'),
-        ('1', '已接受'),
-        ('2', '已拒绝'),
-    )
-    id = models.AutoField(primary_key=True)
-    sn = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    team = models.CharField('团队sn', max_length=100, blank=True, null=True)
-    member_id = models.UUIDField('成员sn', max_length=100, blank=True, null=True)
-    cap = models.UUIDField('队长sn', max_length=100)
-    status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
-    teacher = models.UUIDField('老师sn', max_length=100, blank=True, null=True)
-
-    class Meta:
-        app_label = 'team'
-        db_table = 'team_invite'
-        verbose_name = '团队邀请表'
-        verbose_name_plural = '团队邀请表'
-
-    @classmethod
-    def name(cls, id):
-        return Team.objects.get(id=id).name
-
-
 class StudentToTeam(BaseModel):
+    STATUS_CHOICES = (
+        ('pending', '待接受'),
+        ('confirmed', '已接受'),
+        ('rejected', '已拒绝'),
+    )
+
     id = models.AutoField(primary_key=True)
     sn = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     student = models.UUIDField('学生sn', max_length=100)
     team = models.UUIDField('团队sn', max_length=100)
     is_cap = models.BooleanField('是否是队长', default=False)
+    status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
 
     class Meta:
         app_label = 'team'
@@ -94,11 +75,19 @@ class StudentToTeam(BaseModel):
     def get_team_by_sn(cls, team_sn):
         return Team.objects.get(sn=team_sn, state=1)
 
+
 class TeacherToTeam(BaseModel):
+    STATUS_CHOICES = (
+        ('pending', '待接受'),
+        ('confirmed', '已接受'),
+        ('rejected', '已拒绝'),
+    )
+
     id = models.AutoField(primary_key=True)
     sn = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     teacher = models.UUIDField('老师sn', max_length=100)
     team = models.UUIDField('团队sn', max_length=100)
+    status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
 
     class Meta:
         app_label = 'team'

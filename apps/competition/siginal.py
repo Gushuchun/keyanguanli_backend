@@ -1,35 +1,35 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import transaction
-from .models import CompetitionMemberConfirm, Competition
+from .models import Competition, TeacherToCompetition, StudentToCompetition
 from apps.team.models import Team
 
-
-@receiver(post_save, sender=CompetitionMemberConfirm)
+@receiver(post_save, sender=StudentToCompetition)
+@receiver(post_save, sender=TeacherToCompetition)
 def update_competition_status(sender, instance, **kwargs):
     """
-    使用select_for_update解决竞态条件问题
+    检查所有老师和学生是否都已确认，如果是，则将比赛状态设为 confirmed
     """
     with transaction.atomic():
-        competition = Competition.objects.get(sn=instance.sn)
+        # 从实例中获取比赛编号
+        competition_sn = instance.competition
+        competition = Competition.objects.select_for_update().get(sn=competition_sn)
 
         if competition.status != 'confirmed':
-            unconfirmed_exists = CompetitionMemberConfirm.objects.filter(
-                sn=competition.sn,
+            unconfirmed_students = StudentToCompetition.objects.filter(
+                competition=competition.sn,
                 status='pending',
                 is_cap=False
             ).exists()
 
-            unconfirmed_exists_1 = CompetitionMemberConfirm.objects.filter(
-                sn=competition.sn,
-                is_cap=False,
-                state=1
+            # 判断是否还有未确认老师
+            unconfirmed_teachers = TeacherToCompetition.objects.filter(
+                competition=competition.sn,
+                status='pending',
             ).exists()
 
-            if not unconfirmed_exists_1 :
-                return
 
-            if not unconfirmed_exists:
+            if not (unconfirmed_students or unconfirmed_teachers):
                 competition.status = 'confirmed'
                 competition.save()
                 team = Team.objects.get(sn=competition.team_id)

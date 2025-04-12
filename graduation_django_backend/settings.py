@@ -57,12 +57,12 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "utils.csrf_middleware.NotUseCsrfTokenMiddlewareMixin",
+    "utils.middleware.csrf_middleware.NotUseCsrfTokenMiddlewareMixin",
     # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "utils.token_auth_middleware.TokenAuthMiddleware",  # 添加token验证中间件
+    "utils.middleware.token_auth_middleware.TokenAuthMiddleware",  # 添加token验证中间件
 ]
 
 # 跨域增加忽略

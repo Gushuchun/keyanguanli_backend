@@ -3,7 +3,7 @@ import uuid
 
 from apps.teacher.models import Teacher
 from apps.team.models import Team
-from utils.baseModel import BaseModel
+from utils.base.baseModel import BaseModel
 
 
 class Competition(BaseModel):
@@ -20,7 +20,7 @@ class Competition(BaseModel):
     score = models.CharField('比赛成绩', max_length=100)
     teacher_num = models.IntegerField('老师数量', default=0)
     team_id = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
-    file = models.CharField("证书图片地址", max_length=255)
+    file = models.CharField("证书图片地址", max_length=255, blank=True, null=True)
     status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
     note = models.TextField('备注', blank=True, null=True)
 
@@ -41,9 +41,6 @@ class Competition(BaseModel):
             if self.score != '无':
                 team.prize_num -=1
             team.save()
-
-            # 标记所有成员确认记录为已删除
-            CompetitionMemberConfirm.objects.filter(sn=self.sn).update(state=0)
 
     def hard_delete(self):
         """真实删除方法"""
@@ -76,7 +73,7 @@ class StudentToCompetition(BaseModel):
         ('confirmed', '已确认'),
     ]
     id = models.AutoField(primary_key=True)
-    sn = models.UUIDField("比赛的uuid", max_length=100)
+    sn = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     student = models.UUIDField('学生的uuid', max_length=100, blank=True, null=True)
     team = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
     competition = models.UUIDField('比赛的uuid', max_length=100)
@@ -97,7 +94,7 @@ class TeacherToCompetition(BaseModel):
         ('confirmed', '已确认'),
     ]
     id = models.AutoField(primary_key=True)
-    sn = models.UUIDField("比赛的uuid", max_length=100)
+    sn = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     teacher = models.UUIDField('老师的uuid', max_length=100, blank=True, null=True)
     team = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
     competition = models.UUIDField('比赛的uuid', max_length=100)
@@ -108,29 +105,5 @@ class TeacherToCompetition(BaseModel):
         app_label = 'competition'
         db_table = 'teacher_to_competition'
         verbose_name = '老师比赛信息表'
-        verbose_name_plural = verbose_name
-
-
-# 该模型为初版记录老师学生对应的比赛及确认的状态，
-# 功能已转移到TeacherToCompetition和StudentToCompetition，
-# 已不再使用
-class CompetitionMemberConfirm(BaseModel):
-    STATUS_CHOICES = [
-        ('pending', '待确认'),
-        ('confirmed', '已确认'),
-    ]
-
-    id = models.AutoField(primary_key=True)
-    sn = models.UUIDField("比赛的uuid", max_length=100)
-    student = models.UUIDField('学生的uuid', max_length=100, blank=True, null=True)
-    status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending', blank=True, null=True)
-    note = models.TextField('备注', blank=True, null=True)
-    teacher = models.UUIDField('带队老师', max_length=100, blank=True, null=True)
-    is_cap = models.BooleanField('是否是队长', default=False)
-
-    class Meta:
-        app_label = 'competition'
-        db_table = 'competition_member_confirmation'
-        verbose_name = '成员确认'
         verbose_name_plural = verbose_name
 

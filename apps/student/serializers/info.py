@@ -3,7 +3,7 @@ from rest_framework import serializers
 from apps.student.models import Student
 import logging
 
-from utils.minio_utils import upload_competition_image_to_minio, delete_files_from_minio
+from utils.service.minio_utils import upload_competition_image_to_minio, delete_files_from_minio
 
 logger = logging.getLogger('student')
 

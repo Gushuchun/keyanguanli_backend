@@ -1,1 +1,1 @@
-from .views import *
+from .competition import *

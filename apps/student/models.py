@@ -1,7 +1,7 @@
 # users/models.py
 from django.db import models
 import uuid
-from utils.baseModel import BaseModel
+from utils.base.baseModel import BaseModel
 from cryptography.fernet import Fernet
 from django.conf import settings
 

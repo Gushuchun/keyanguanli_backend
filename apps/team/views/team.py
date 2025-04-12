@@ -1,107 +1,166 @@
 from django.db import transaction
-from rest_framework import viewsets, status
+from rest_framework import status
 from rest_framework.response import Response
-from django.http import JsonResponse
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
-
 from apps.team.models import Team, StudentToTeam, TeacherToTeam
-from apps.team.serializers import TeamSerializer, AllTeamSerializer, TeamUpdateSerializer
-import logging
+from apps.team.serializers import (
+    TeamCreateSerializer,
+    TeamMemberInviteSerializer,
+    TeamTeacherInviteSerializer,
+    TeamStudentConfirmSerializer,
+    TeamTeacherConfirmSerializer
+)
+from .baseView import BaseConfirmViewSet, BaseTeamViewSet
+from apps.team.serializers import BaseTeamSerializer
 
-from utils.baseView import BaseModelViewSet
+class TeamViewSet(BaseTeamViewSet):
+    """团队视图集"""
 
-# logger = logging.getLogger('team')
-logger_security = logging.getLogger('security')
+    def create(self, request, *args, **kwargs):
+        serializer = TeamCreateSerializer(
+            data=request.data,
+            context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
 
-class TeamViewSet(BaseModelViewSet):
-    queryset = Team.objects.filter(state=1)
-    serializer_class = TeamSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        """根据不同的action返回不同的queryset"""
-        if self.action == 'list_my_team':
-            # 只返回当前用户所在的团队
-            team_sn_list = StudentToTeam.objects.filter(
-                student=self.request.sn,
-                state=1
-            ).values_list('team', flat=True)
-            return Team.objects.filter(sn__in=team_sn_list, state=1)
-        return super().get_queryset()
+        try:
+            team = serializer.save()
+            return Response({
+                "code": status.HTTP_200_OK,
+                "message": "团队创建成功，邀请已发送",
+                "data": BaseTeamSerializer(team).data
+            })
+        except Exception as e:
+            return Response({
+                "code": status.HTTP_500_INTERNAL_SERVER_ERROR,
+                "message": "创建团队失败",
+                "error": str(e)
+            })
 
     @action(detail=False, methods=['get'])
-    def list_my_team(self, request):
-        """查看我的团队"""
-        queryset = self.filter_queryset(self.get_queryset())
+    def my(self, request):
+        """获取当前用户所属团队"""
+        team_sns = StudentToTeam.objects.filter(
+            student=request.sn,
+            status='confirmed',
+            state=1
+        ).values_list('team', flat=True)
+
+        queryset = self.filter_queryset(
+            self.get_queryset().filter(sn__in=team_sns)
+        )
+
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
-        return Response({"code": 200, "data": serializer.data})
+        return Response({
+            "code": status.HTTP_200_OK,
+            "data": serializer.data
+        })
 
-    @action(detail=False, methods=['get'])
-    def list_all_team(self, request):
-        """查看所有团队(简化版)"""
-        queryset = self.filter_queryset(Team.objects.all())
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-
-        serializer = AllTeamSerializer(queryset, many=True)
-        return Response({"code": 200, "data": serializer.data})
-
-    @action(detail=True, methods=['delete'])
-    def dismiss_team(self, request, pk=None):
-        """删除团队"""
-        team = self.get_object()
-        if team.cap != request.sn:
-            return Response({"message": "您没有权限删除该团队", "code": 403})
-        team.delete()
-        team.save()
-
-        return Response({"message": "团队已解散", "code": 200})
-
-
-    @action(detail=True, methods=['put'])
-    def update_team(self, request, pk=None):
-        """更新团队信息（只有队长可以操作）"""
-        team = Team.objects.get(id=pk, state=1)
-
-        # 检查当前用户是否是队长
-        if str(team.cap) != str(request.sn):
-            logger_security.warning(f"用户 {request.username} 尝试修改其他团队信息 (团队ID: {pk})")
-            # logger.info(f"用户 {request.username} 尝试修改其他团队信息 (团队ID: {pk})")
-            return Response({"message": "您没有权限修改该团队信息", "code": 403})
-
-        serializer = TeamUpdateSerializer(team, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-
-        return Response({"message": "团队信息已更新", "code": 200, "data": serializer.data})
-
-    @action(detail=False, methods=['put'])
-    def quit_team(self, request, pk=None):
+    @action(detail=True, methods=['post'])
+    def quit(self, request, pk=None):
         """退出团队"""
-        with transaction.atomic():
-            team_sn = Team.objects.filter(id=pk).first().sn
-            student_sn = request.sn
+        team = self.get_object()
 
-            student_to_team = StudentToTeam.objects.filter(
-                team=team_sn,
-                student=student_sn,
-                state=1
+        with transaction.atomic():
+            relation = StudentToTeam.objects.filter(
+                team=team.sn,
+                student=request.sn,
+                status='confirmed',
             ).first()
 
-            if not student_to_team:
-                return Response({"message": "用户不在该团队中", "code": 400}, status=400)
+            if not relation:
+                return Response({
+                    "code": status.HTTP_400_BAD_REQUEST,
+                    "message": "您不在该团队中"
+                })
 
-            team = student_to_team.get_team_by_sn(team_sn)
+            # 如果是队长，需要先转让队长权限才能退出
+            if relation.is_cap:
+                return Response({
+                    "code": status.HTTP_400_BAD_REQUEST,
+                    "message": "队长请先转让权限再退出团队"
+                })
+
+            relation.delete()
             team.people_num -= 1
             team.save()
-            student_to_team.hard_delete()
 
-        return Response({"message": "退出团队成功", "code": 200})
+        return Response({
+            "code": status.HTTP_200_OK,
+            "message": "已成功退出团队"
+        })
+
+    @action(detail=False, methods=['post'], url_path='invite-new-student')
+    def invite_member(self, request):
+        """邀请新成员"""
+        serializer = TeamMemberInviteSerializer(
+            data=request.data,
+            context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+
+        try:
+            # 检查队长权限
+            team = Team.objects.get(sn=serializer.validated_data['team_sn'])
+            self.check_captain_permission(team)
+
+            invite = serializer.save()
+            return Response({
+                "code": status.HTTP_200_OK,
+                "message": "成员邀请已发送",
+                "data": {
+                    "invite_id": invite.id
+                }
+            })
+        except Exception as e:
+            return Response({
+                "code": status.HTTP_500_INTERNAL_SERVER_ERROR,
+                "message": "邀请发送失败",
+                "error": str(e)
+            })
+
+    @action(detail=False, methods=['post'], url_path='invite-new-teacher')
+    def invite_teacher(self, request):
+        """邀请新老师"""
+        serializer = TeamTeacherInviteSerializer(
+            data=request.data,
+            context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+
+        try:
+            # 检查队长权限
+            team = Team.objects.get(sn=serializer.validated_data['team_sn'])
+            self.check_captain_permission(team)
+
+            invite = serializer.save()
+            return Response({
+                "code": status.HTTP_200_OK,
+                "message": "老师邀请已发送",
+                "data": {
+                    "invite_id": invite.id
+                }
+            })
+        except Exception as e:
+            return Response({
+                "code": status.HTTP_500_INTERNAL_SERVER_ERROR,
+                "message": "邀请发送失败",
+                "error": str(e)
+            })
+
+
+class TeamStudentConfirmViewSet(BaseConfirmViewSet):
+    """学生确认视图集"""
+    queryset = StudentToTeam.objects.all()
+    serializer_class = TeamStudentConfirmSerializer
+
+
+class TeamTeacherConfirmViewSet(BaseConfirmViewSet):
+    """老师确认视图集"""
+    queryset = TeacherToTeam.objects.all()
+    serializer_class = TeamTeacherConfirmSerializer

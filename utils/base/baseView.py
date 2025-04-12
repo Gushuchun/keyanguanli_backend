@@ -2,11 +2,9 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError, PermissionDenied
 from django.http import Http404
+from utils.middleware.response_formatter import format_validation_error, format_permission_denied, format_http404_error
 import logging
-
-from utils.response_formatter import format_validation_error, format_permission_denied, format_http404_error
-
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('error')
 
 
 class BaseModelViewSet(viewsets.ModelViewSet):
@@ -52,4 +50,20 @@ class BaseModelViewSet(viewsets.ModelViewSet):
         # 如果没有分页，序列化所有数据
         serialized_data = serializer(queryset, many=True).data
         return Response({"message": "获取成功", "code": 200, "data": serialized_data})
+
+    def success_response(self, data=None, message="操作成功", code=status.HTTP_200_OK):
+        """统一成功响应格式"""
+        return Response({
+            "message": message,
+            "data": data,
+            "code": code
+        })
+
+    def error_response(self, message, code=status.HTTP_400_BAD_REQUEST, error=None):
+        """统一错误响应格式"""
+        return Response({
+            "message": message,
+            "error": str(error) if error else None,
+            "code": code
+        })
 

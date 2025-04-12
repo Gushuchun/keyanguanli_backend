@@ -1,7 +1,7 @@
 # teachers/models.py
 from django.db import models
 import uuid
-from utils.baseModel import BaseModel
+from utils.base.baseModel import BaseModel
 
 
 class Teacher(BaseModel):

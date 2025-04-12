@@ -14,7 +14,7 @@ def update_competition_status(sender, instance, **kwargs):
     """
     with transaction.atomic():
         # 从实例中获取比赛编号
-        team_sn = instance.competition
+        team_sn = instance.team
         team = Team.objects.select_for_update().get(sn=team_sn)
 
         # 检查是否还有未确认的学生
@@ -26,7 +26,7 @@ def update_competition_status(sender, instance, **kwargs):
 
         # 检查是否还有未确认的老师
         unconfirmed_teachers = TeacherToTeam.objects.filter(
-            competition=team.sn,
+            team=team.sn,
             status='pending',
         ).exists()
 
@@ -40,12 +40,12 @@ def update_competition_status(sender, instance, **kwargs):
 
             # 获取已确认老师数量
             confirmed_teachers_count = TeacherToTeam.objects.filter(
-                competition=team.sn,
+                team=team.sn,
                 status='confirmed'
             ).count()
 
             # 更新团队状态和人数统计
             team.state = 1
-            team.people_num = confirmed_students_count  # 更新学生人数
-            team.teacher_num = confirmed_teachers_count  # 更新老师人数
+            team.people_num = confirmed_students_count + confirmed_teachers_count
+            team.teacher_num = confirmed_teachers_count
             team.save()

@@ -1,4 +1,4 @@
-from utils.baseModel import BaseModel
+from utils.base.baseModel import BaseModel
 from django.db import models
 
 class College(BaseModel):
