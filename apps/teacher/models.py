@@ -1,4 +1,4 @@
-# teachers/models.py
+# teachers/user.py
 from django.db import models
 import uuid
 from utils.base.baseModel import BaseModel
@@ -26,6 +26,8 @@ class Teacher(BaseModel):
     email = models.EmailField('邮箱', blank=True)
     title = models.CharField('职称', max_length=50, choices=TITLE_CHOICES)
     is_active = models.BooleanField('在职状态', default=True)
+    avatar = models.CharField('头像', blank=True, null=True, max_length=255)
+    note = models.CharField('备注', blank=True, max_length=255)
 
     class Meta:
         app_label = "teacher"
@@ -35,3 +37,10 @@ class Teacher(BaseModel):
 
     def __str__(self):
         return f"{self.name}({self.get_title_display()})"
+
+    @classmethod
+    def get_college(self, id):
+        """获取学院名称"""
+        from apps.college.models import College
+        college = College.objects.filter(id=id).first()
+        return college.name if college else None

@@ -1,4 +1,4 @@
-# teams/models.py
+# teams/user.py
 from utils.base.baseModel import BaseModel
 import uuid
 from apps.teacher.models import Teacher
@@ -13,6 +13,8 @@ class Team(BaseModel):
     people_num = models.IntegerField('总人数', default=0)
     cap = models.UUIDField('队长sn', max_length=100)
     teacher_num = models.IntegerField('老师人数', default=0)
+    status = models.CharField('团队状态', max_length=20, default='pending')
+    reminder_sent = models.BooleanField('提醒是否已发送', default=False)
 
     class Meta:
         app_label = 'team'
@@ -56,6 +58,7 @@ class StudentToTeam(BaseModel):
         ('pending', '待接受'),
         ('confirmed', '已接受'),
         ('rejected', '已拒绝'),
+        ('expired', '已过期')
     )
 
     id = models.AutoField(primary_key=True)
@@ -64,6 +67,7 @@ class StudentToTeam(BaseModel):
     team = models.UUIDField('团队sn', max_length=100)
     is_cap = models.BooleanField('是否是队长', default=False)
     status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
+    reminder_sent = models.BooleanField('提醒是否已发送', default=False)
 
     class Meta:
         app_label = 'team'
@@ -75,12 +79,17 @@ class StudentToTeam(BaseModel):
     def get_team_by_sn(cls, team_sn):
         return Team.objects.get(sn=team_sn, state=1)
 
+    @classmethod
+    def get_email(cls, student_sn):
+        from apps.student.models import Student
+        return Student.objects.get(sn=student_sn, state=1).email
 
 class TeacherToTeam(BaseModel):
     STATUS_CHOICES = (
         ('pending', '待接受'),
         ('confirmed', '已接受'),
         ('rejected', '已拒绝'),
+        ('expired', '已过期')
     )
 
     id = models.AutoField(primary_key=True)
@@ -88,9 +97,15 @@ class TeacherToTeam(BaseModel):
     teacher = models.UUIDField('老师sn', max_length=100)
     team = models.UUIDField('团队sn', max_length=100)
     status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
+    reminder_sent = models.BooleanField('提醒是否已发送', default=False)
 
     class Meta:
         app_label = 'team'
         db_table = 'teacher_to_team'
         verbose_name = '老师-团队表'
         verbose_name_plural = '老师-团队表'
+
+    @classmethod
+    def get_email(cls, teacher_sn):
+        from apps.teacher.models import Teacher
+        return Teacher.objects.get(sn=teacher_sn, state=1).email

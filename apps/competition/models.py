@@ -19,10 +19,11 @@ class Competition(BaseModel):
     description = models.CharField('比赛描述', max_length=1000)
     score = models.CharField('比赛成绩', max_length=100)
     teacher_num = models.IntegerField('老师数量', default=0)
-    team_id = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
+    team_sn = models.UUIDField('团队的uuid', max_length=100, blank=True, null=True)
     file = models.CharField("证书图片地址", max_length=255, blank=True, null=True)
     status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending')
     note = models.TextField('备注', blank=True, null=True)
+    reminder_sent = models.BooleanField('提醒是否已发送', default=False)
 
     class Meta:
         app_label = 'competition'
@@ -38,7 +39,7 @@ class Competition(BaseModel):
 
             team = Team.objects.filter(sn=self.team_id).first()
             team.race_num -=1
-            if self.score != '无':
+            if self.score != '0':
                 team.prize_num -=1
             team.save()
 
@@ -50,7 +51,7 @@ class Competition(BaseModel):
     def get_cap(cls, id):
         competition = cls.objects.filter(id=id).first()
         if competition:
-            team = Team.objects.filter(sn=competition.team_id).first()
+            team = Team.objects.filter(sn=competition.team_sn).first()
             if team:
                 return team.cap
         return None
@@ -80,12 +81,18 @@ class StudentToCompetition(BaseModel):
     status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending', blank=True, null=True)
     note = models.TextField('备注', blank=True, null=True)
     is_cap = models.BooleanField('是否是队长', default=False)
+    reminder_sent = models.BooleanField('提醒是否已发送', default=False)
 
     class Meta:
         app_label = 'competition'
         db_table = 'student_to_competition'
         verbose_name = '学生比赛信息表'
         verbose_name_plural = verbose_name
+
+    @classmethod
+    def get_email(cls, student_sn):
+        from apps.student.models import Student
+        return Student.objects.get(sn=student_sn, state=1).email
 
 
 class TeacherToCompetition(BaseModel):
@@ -100,10 +107,16 @@ class TeacherToCompetition(BaseModel):
     competition = models.UUIDField('比赛的uuid', max_length=100)
     status = models.CharField('状态', max_length=20, choices=STATUS_CHOICES, default='pending', blank=True, null=True)
     note = models.TextField('备注', blank=True, null=True)
+    reminder_sent = models.BooleanField('提醒是否已发送', default=False)
 
     class Meta:
         app_label = 'competition'
         db_table = 'teacher_to_competition'
         verbose_name = '老师比赛信息表'
         verbose_name_plural = verbose_name
+
+    @classmethod
+    def get_email(cls, teacher_sn):
+        from apps.teacher.models import Teacher
+        return Teacher.objects.get(sn=teacher_sn, state=1).email
 

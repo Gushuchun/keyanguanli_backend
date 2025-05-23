@@ -1,4 +1,4 @@
-# users/models.py
+# users/user.py
 from django.db import models
 import uuid
 from utils.base.baseModel import BaseModel
@@ -23,6 +23,7 @@ class Student(BaseModel):
     # is_cap = models.BooleanField('是否是队长', default=False)
     email = models.CharField('邮箱', blank=True, max_length=100)
     avatar = models.CharField('头像', blank=True, null=True, max_length=255)
+    note = models.CharField('备注', blank=True, max_length=255)
 
     class Meta:
         app_label = 'student'
@@ -37,6 +38,13 @@ class Student(BaseModel):
         """解密身份证号"""
         cn = cipher.decrypt(self.cn.encode()).decode()
         return cipher.decrypt(self.cn.encode()).decode()
+
+    @classmethod
+    def get_college(self, id):
+        """获取学院名称"""
+        from apps.college.models import College
+        college = College.objects.filter(id=id).first()
+        return college.name if college else None
 
     # 在保存模型之前自动加密身份证号
     # def save(self, *args, **kwargs):
