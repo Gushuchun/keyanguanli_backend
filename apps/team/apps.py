@@ -7,3 +7,5 @@ class TeamConfig(AppConfig):
 
     def ready(self):
         import apps.team.siginal
+        from .schedulers import start_scheduler
+        start_scheduler()

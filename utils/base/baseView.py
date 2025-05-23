@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError, PermissionDenied
 from django.http import Http404
-from utils.middleware.response_formatter import format_validation_error, format_permission_denied, format_http404_error
+from utils.base.response_formatter import format_validation_error, format_permission_denied, format_http404_error
 import logging
 logger = logging.getLogger('error')
 

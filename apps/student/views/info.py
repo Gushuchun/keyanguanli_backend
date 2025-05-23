@@ -3,14 +3,13 @@ from rest_framework.viewsets import ViewSet
 from rest_framework import status
 from rest_framework.response import Response
 from apps.student.models import Student
-from apps.student.serializers import StudentSerializer, StudentAvatarSerializer
+from apps.student.serializers import StudentSerializer, StudentAvatarSerializer, StudentNotMeSerializer
 import logging
+
+from apps.user.models import UserModel
 
 logger = logging.getLogger('student')
 
-from django.views.decorators.csrf import csrf_exempt
-
-# @csrf_exempt
 class StudentInfoViewSet(ViewSet):
     def list(self, request):
         """获取用户信息"""
@@ -43,6 +42,13 @@ class StudentInfoViewSet(ViewSet):
 
             user = Student.objects.get(id=pk)
 
+            email  = request.data.get('email')
+            if email and UserModel.objects.filter(email=email).exists():
+                return Response(
+                    {'message': '邮箱已被注册', 'code': 400},
+                    status=status.HTTP_200_OK
+                )
+
             # 使用Serializer处理
             serializer = StudentSerializer(
                 user,
@@ -58,7 +64,7 @@ class StudentInfoViewSet(ViewSet):
                 )
                 return Response(
                     {'error': '数据验证失败', 'details': serializer.errors},
-                    status=status.HTTP_400_BAD_REQUEST
+                    status=status.HTTP_200_OK
                 )
 
             serializer.save()
@@ -88,15 +94,8 @@ class StudentInfoViewSet(ViewSet):
         try:
             current_user = Student.objects.get(sn=request.sn, state=1)
 
-            # 获取并验证上传的文件
-            avatar = request.FILES.get('avatar')
-            if not avatar:
-                return Response(
-                    {'message': '没有上传头像', 'code': 400},
-                )
-
             # 使用头像序列化器处理头像上传
-            serializer = StudentAvatarSerializer(current_user, data={'avatar': avatar}, partial=True)
+            serializer = StudentAvatarSerializer(current_user, data={'avatar': request.FILES.get('avatar')}, partial=True)
 
             if not serializer.is_valid():
                 logger.info(f"用户 {current_user.username} 上传头像失败: {serializer.errors}")
@@ -122,3 +121,28 @@ class StudentInfoViewSet(ViewSet):
             return Response(
                 {'message': '服务器内部错误', 'code': 500},
             )
+
+    @action(detail=False, methods=['get'])
+    def get_avatar(self, request):
+        """获取用户头像"""
+        try:
+            current_user = Student.objects.get(sn=request.sn, state=1)
+            avatar_url = current_user.avatar
+            return Response({'avatar_url': avatar_url})
+        except Student.DoesNotExist:
+            logger.warning(f"用户 {request.sn} 不存在")
+            return Response(
+                {'message': '用户不存在', 'code': 404}
+            )
+
+
+    @action(detail=False, methods=['post'], url_path='get-student-info')
+    def get_student_info(self, request):
+        """获取学生信息"""
+        sn = request.data.get('sn')
+        try:
+            student = Student.objects.get(sn=sn, state=1)
+            serializer = StudentNotMeSerializer(student)
+            return Response(serializer.data)
+        except Student.DoesNotExist:
+            return Response({'message': '学生不存在'}, status=status.HTTP_404_NOT_FOUND)

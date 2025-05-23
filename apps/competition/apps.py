@@ -7,3 +7,5 @@ class CompetitionConfig(AppConfig):
 
     def ready(self):
         import apps.competition.siginal
+        from .schedulers import start_scheduler
+        start_scheduler()

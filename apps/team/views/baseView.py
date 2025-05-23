@@ -11,6 +11,7 @@ from utils.base.baseView import BaseModelViewSet
 
 class BaseTeamViewSet(BaseModelViewSet):
     """团队基础视图集"""
+    queryset = Team.objects.filter(state=1).order_by('-create_time')
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):

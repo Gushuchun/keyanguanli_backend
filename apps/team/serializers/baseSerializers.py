@@ -1,17 +1,24 @@
 from apps.team.models import Team
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError, PermissionDenied
+from apps.student.models import Student
 
 class BaseTeamSerializer(serializers.ModelSerializer):
     """团队基础序列化器"""
+
+    cap_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Team
-        fields = ['create_time', 'id', 'sn', 'name', 'cap', 'people_num', 'race_num', 'prize_num', 'teacher_num']
+        fields = ['create_time', 'id', 'sn', 'name', 'cap', 'people_num', 'race_num', 'prize_num', 'teacher_num', 'cap_name', 'status']
         extra_kwargs = {
             'sn': {'read_only': True},
             'cap': {'read_only': True},
         }
 
+    def get_cap_name(self, obj):
+        cap = Student.objects.get(sn=obj.cap)
+        return cap.username
 
 class BaseInviteSerializer(serializers.Serializer):
     """邀请基础序列化器"""
@@ -32,7 +39,7 @@ class BaseInviteSerializer(serializers.Serializer):
 
     def validate_invite_exists(self, model, team_sn, target_sn, error_msg):
         """验证是否已邀请(排除已拒绝的)"""
-        if model.objects.filter(team=team_sn, **{self.get_target_field(): target_sn}).exclude(status='rejected').exists():
+        if model.objects.filter(team=team_sn, state=1, **{self.get_target_field(): target_sn}).exclude(status='rejected').exists():
             raise ValidationError(error_msg)
         return True
 

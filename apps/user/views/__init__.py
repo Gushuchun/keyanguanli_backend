@@ -1,2 +1,4 @@
 from .register import Register
-from  .login import LoginView
+from  .login import *
+from .password import *
+from .search import *

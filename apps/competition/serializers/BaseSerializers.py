@@ -16,8 +16,8 @@ class BaseCompetitionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Competition
-        fields = ['sn', 'date', 'description', 'score', 'team_id', 'file',
-                  'note', 'title', 'certificate_image', 'status']
+        fields = ['sn', 'date', 'description', 'score', 'team_sn', 'file',
+                  'note', 'title', 'certificate_image', 'status', 'id',]
         extra_kwargs = {
             'sn': {'read_only': True},
             'status': {'read_only': True},
@@ -58,3 +58,48 @@ class BaseConfirmSerializer(serializers.ModelSerializer):
         """验证用户权限"""
         if getattr(request, 'sn') != getattr(self.instance, field_name):
             raise PermissionDenied("只能确认自己的参赛记录")
+
+
+class BaseInviteSerializer(serializers.Serializer):
+    """邀请基础序列化器"""
+    competition_sn = serializers.CharField(required=True)
+    target_sn = serializers.CharField(required=True)
+
+    def validate_competition(self, competition_sn):
+        """验证团队是否存在"""
+        if not Competition.objects.filter(sn=competition_sn).exists():
+            raise ValidationError("比赛不存在")
+        return competition_sn
+
+    def validate_target(self, model, sn_field, sn, error_msg):
+        """验证目标(成员/老师)是否存在"""
+        if not model.objects.filter(**{sn_field: sn}).exists():
+            raise ValidationError(error_msg)
+        return sn
+
+    def validate_invite_exists(self, model, competition_sn, target_sn, error_msg):
+        """验证是否已邀请(排除已拒绝的)"""
+        if model.objects.filter(competition=competition_sn, state=1, **{self.get_target_field(): target_sn}).exclude(status='rejected').exists():
+            raise ValidationError(error_msg)
+        return True
+
+    def get_target_field(self):
+        """获取目标字段名(子类实现)"""
+        raise NotImplementedError
+
+    def get_invite_model(self):
+        """获取邀请模型(子类实现)"""
+        raise NotImplementedError
+
+    def get_target_model(self):
+        """获取目标模型(子类实现)"""
+        raise NotImplementedError
+
+    def create_invite(self, competition_sn, target_sn, **extra_fields):
+        """创建邀请记录"""
+        return self.get_invite_model().objects.create(
+            competition=competition_sn,
+            **{self.get_target_field(): target_sn},
+            status='pending',
+            **extra_fields
+        )

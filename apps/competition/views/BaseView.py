@@ -7,11 +7,11 @@ from apps.competition.serializers import (
 )
 from apps.competition.serializers.BaseSerializers import BaseCompetitionSerializer
 from utils.base.baseView import BaseModelViewSet
-
+from django.conf import settings
 
 class BaseCompetitionViewSet(BaseModelViewSet):
     """竞赛基础视图集"""
-    queryset = Competition.objects.filter(state=1)
+    queryset = Competition.objects.filter(state=1).order_by('create_time')
     serializer_class = BaseCompetitionSerializer
 
     def get_serializer_class(self):
