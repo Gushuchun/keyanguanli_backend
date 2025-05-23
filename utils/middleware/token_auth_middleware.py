@@ -12,7 +12,12 @@ logger = logging.getLogger('user')
 class TokenAuthMiddleware(MiddlewareMixin):
     def process_request(self, request):
         # 忽略登录和注册接口的请求
-        if request.path in ['/api/user/login/', '/api/user/register/']:
+        if request.path in ['/api/user/login/',
+                            '/api/user/register/',
+                            '/api/college/public/',
+                            '/api/user/sms_send/',
+                            '/api/user/code_login/',
+                            '/api/user/forgot-password/',]:
             return None
 
         auth_header = request.headers.get('Authorization')
@@ -53,12 +58,12 @@ class TokenAuthMiddleware(MiddlewareMixin):
 
         except jwt.ExpiredSignatureError:
             logger.info('token已过期')
-            return JsonResponse({'error': 'token已过期'}, status=400)
+            return JsonResponse({'message': 'token已过期', 'code': 400}, status=200)
         except jwt.InvalidTokenError:
             logger.info('无效的token')
-            return JsonResponse({'error': '无效的token'}, status=400)
+            return JsonResponse({'message': '无效的token', 'code': 400}, status=200)
         except User.DoesNotExist:
             logger.info('用户不存在')
-            return JsonResponse({'error': '用户不存在'}, status=400)
+            return JsonResponse({'message': '用户不存在', 'code': 400}, status=200)
 
         return None
