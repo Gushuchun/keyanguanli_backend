@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status, permissions
-from rest_framework.decorators import action
 from rest_framework.response import Response
 from apps.user.serializers import StudentRegistrationSerializer, TeacherRegistrationSerializer
 
@@ -28,7 +27,6 @@ class Register(viewsets.ViewSet):
             "team_id": "团队ID",
             // 教师特有字段
             "email": "邮箱",
-            "title": "职称"
         }
         """
         serializer = self.get_serializer(data=request.data)

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "apps.college",
     "apps.teacher",
     "apps.student",
+    "apps.settings",
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,11 @@ MIDDLEWARE = [
 
 # 跨域增加忽略
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
 CORS_ORIGIN_WHITELIST = [
     "http://*",
@@ -104,7 +109,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 5,
 }
 
 ROOT_URLCONF = "graduation_django_backend.urls"
@@ -202,6 +207,40 @@ FERNET_KEY=os.environ.get('FERNET_KEY')
 log_dir = os.path.join(BASE_DIR, 'logs')
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+
+SMS_CODE_EXPIRE = 300  # 验证码过期时间（秒）
+SMS_SEND_AGAIN = 60  # 再次发送验证码的间隔时间（秒）
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'utils', 'service', '../resource/GeoLite2-City.mmdb')
+
+# Celery 配置
+CELERY_BROKER_URL = 'redis://:123456jl@127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://:123456jl@127.0.0.1:6379/2'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://:123456jl@127.0.0.1:6379/1",  # Redis 服务器地址和数据库编号
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # "PASSWORD": "123456jl",  # 如果有密码需要配置
+        },
+        "KEY_PREFIX": "myproject"  # 缓存键前缀
+    }
+}
 
 # 日志配置
 LOGGING = {
