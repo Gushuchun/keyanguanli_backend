@@ -55,7 +55,7 @@ def clean_expired_competitions():
         if recipient_list:
             logger.info(f'发送邮件给 {recipient_list}')
             subject = '科研管理平台 竞赛确认提醒'
-            message = f'您有待处理的竞赛申请：{competition.name}，请尽快确认！'
+            message = f'您有待处理的竞赛申请：{competition.title}，请尽快确认！'
             from_email = settings.DEFAULT_FROM_EMAIL
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 

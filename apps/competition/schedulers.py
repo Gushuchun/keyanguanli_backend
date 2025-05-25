@@ -7,7 +7,7 @@ logger = logging.getLogger('competition')
 def start_scheduler():
     from apscheduler.schedulers.background import BackgroundScheduler
     scheduler = BackgroundScheduler()
-    scheduler.add_job(clean_expired_competitions, 'cron', id='clean_expired_competitions', minute='*/1', max_instances=1)
+    scheduler.add_job(clean_expired_competitions, 'cron', id='clean_expired_competitions', hour='*/1', max_instances=1)
     # scheduler.add_job(clean_expired_invite, 'cron', id='clean_expired_invite', hour='*/1', max_instances=1)
 
     scheduler.start()

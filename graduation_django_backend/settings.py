@@ -222,8 +222,8 @@ SMS_SEND_AGAIN = 60  # 再次发送验证码的间隔时间（秒）
 GEOIP_PATH = os.path.join(BASE_DIR, 'utils', 'service', '../resource/GeoLite2-City.mmdb')
 
 # Celery 配置
-CELERY_BROKER_URL = 'redis://:123456jl@127.0.0.1:6379/0'
-CELERY_RESULT_BACKEND = 'redis://:123456jl@127.0.0.1:6379/2'
+CELERY_BROKER_URL = f"redis://:{os.getenv('CELERY_BROKER_REDIS_PASSWORD')}@{os.getenv('CELERY_BROKER_REDIS_HOST')}:{os.getenv('CELERY_BROKER_REDIS_PORT')}/{os.getenv('CELERY_BROKER_REDIS_DB')}"
+CELERY_RESULT_BACKEND = f"redis://:{os.getenv('CELERY_RESULT_REDIS_PASSWORD')}@{os.getenv('CELERY_RESULT_REDIS_HOST')}:{os.getenv('CELERY_RESULT_REDIS_PORT')}/{os.getenv('CELERY_RESULT_REDIS_DB')}"
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -233,7 +233,7 @@ CELERY_TIMEZONE = 'UTC'
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://:123456jl@127.0.0.1:6379/1",  # Redis 服务器地址和数据库编号
+        "LOCATION": f"redis://:{os.getenv('CACHE_REDIS_PASSWORD')}@{os.getenv('CACHE_REDIS_HOST')}:{os.getenv('CACHE_REDIS_PORT')}/{os.getenv('CACHE_REDIS_DB')}",  # Redis 服务器地址和数据库编号
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             # "PASSWORD": "123456jl",  # 如果有密码需要配置
