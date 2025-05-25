@@ -17,7 +17,8 @@ class TokenAuthMiddleware(MiddlewareMixin):
                             '/api/college/public/',
                             '/api/user/sms_send/',
                             '/api/user/code_login/',
-                            '/api/user/forgot-password/',]:
+                            '/api/user/forgot-password/',
+                            '/api/user/get-public-key/']:
             return None
 
         auth_header = request.headers.get('Authorization')

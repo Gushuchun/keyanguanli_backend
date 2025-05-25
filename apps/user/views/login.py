@@ -7,17 +7,21 @@ from apps.student.models import Student
 from apps.teacher.models import Teacher
 from ..models import UserModel, SMSCode
 from django.utils import timezone
-from utils.token_utils import generate_token
+from utils.middleware.token_utils import generate_token
 import logging
 from django.contrib.auth import authenticate, login as auth_login, user_login_failed
 from django_redis import get_redis_connection
+import base64
+from utils.keys.rsa_crypt import decryption
+
 
 logger = logging.getLogger('user')
 
 class LoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
-        password = request.data.get('password')
+        password = decryption(request.data.get('password'))
+
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
