@@ -51,7 +51,7 @@ class BaseRegistrationSerializer(serializers.Serializer):
 
 
 class StudentRegistrationSerializer(BaseRegistrationSerializer):
-    cn = serializers.CharField(max_length=100)
+    # cn = serializers.CharField(max_length=100)
     team_id = serializers.CharField(required=False, allow_blank=True)
 
     def create_student(self, user, validated_data):
@@ -60,7 +60,7 @@ class StudentRegistrationSerializer(BaseRegistrationSerializer):
             student = Student.objects.create(
                 **validated_data
             )
-            student.set_cn(validated_data['cn'])
+            # student.set_cn(validated_data['cn'])
             student.save()
             # 返回学生对象
 
@@ -75,7 +75,7 @@ class StudentRegistrationSerializer(BaseRegistrationSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         # 解密身份证号
-        representation['cn'] = instance.get_cn()
+        # representation['cn'] = instance.get_cn()
         representation['gender'] = '1' if instance.gender else '0'
         return representation
 
