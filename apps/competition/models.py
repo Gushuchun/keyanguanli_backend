@@ -39,7 +39,7 @@ class Competition(BaseModel):
 
             team = Team.objects.filter(sn=self.team_id).first()
             team.race_num -=1
-            if self.score != '0':
+            if self.score != '无':
                 team.prize_num -=1
             team.save()
 

@@ -47,7 +47,7 @@ def update_competition_status(sender, instance, **kwargs):
                 team = Team.objects.get(sn=competition.team_sn)
                 team.race_num += 1
                 colleges = []
-                if competition.score != '0':
+                if competition.score != '无':
                     team.prize_num += 1
                     # 给每个学生的 race_num 和 prize_num 加 1
                     students = StudentToCompetition.objects.filter(competition=competition.sn)
