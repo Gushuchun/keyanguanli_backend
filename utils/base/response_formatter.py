@@ -6,20 +6,36 @@ import logging
 
 logger = logging.getLogger("error")
 
+
 def format_validation_error(e):
     """
     格式化 ValidationError 为统一的 JSON 响应结构
     """
     error_detail = e.detail
-    non_field_errors = error_detail.get('non_field_errors', [])
-    first_error_msg = non_field_errors[0] if non_field_errors else '参数验证失败'
+
+    # 处理不同类型的错误详情
+    if isinstance(error_detail, list):
+        # 列表类型的错误（非字段错误）
+        first_error_msg = error_detail[0] if error_detail else '参数验证失败'
+        error_data = {"non_field_errors": error_detail}
+    elif isinstance(error_detail, dict):
+        # 字典类型的错误（字段相关错误）
+        non_field_errors = error_detail.get('non_field_errors', [])
+        first_error_msg = non_field_errors[0] if non_field_errors else '参数验证失败'
+        error_data = error_detail
+    else:
+        # 其他类型的错误
+        first_error_msg = str(error_detail)
+        error_data = {"detail": str(error_detail)}
 
     logger.info(f"Validation error: {first_error_msg}")
+
+    # 返回400状态码而不是200（验证错误应该是400）
     return Response({
         "code": 400,
         "message": first_error_msg,
-        "data": error_detail
-    }, status=status.HTTP_200_OK)
+        "data": error_data
+    }, status=status.HTTP_200_OK)  # 改为400状态码
 
 
 def format_permission_denied(e):

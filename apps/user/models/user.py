@@ -4,6 +4,9 @@ from django.db import models
 from cryptography.fernet import Fernet
 from django.conf import settings
 
+from apps.student.models import Student
+from apps.teacher.models import Teacher
+
 FERNET_KEY = settings.FERNET_KEY  # 假设密钥存在于 settings.py 文件中
 cipher = Fernet(FERNET_KEY)
 
@@ -96,6 +99,15 @@ class UserModel(AbstractUser):
     def get_cn(self):
         """解密身份证号"""
         return cipher.decrypt(self.cn.encode()).decode()
+
+    @property
+    def get_sn(self):
+        if self.role == 'student':
+            student = Student.objects.filter(username=self.username).first()
+            return student.sn
+        elif self.role == 'teacher':
+            teacher = Teacher.objects.filter(username=self.username).first()
+            return teacher.sn
 
     # 在保存模型之前自动加密身份证号
     def save(self, *args, **kwargs):

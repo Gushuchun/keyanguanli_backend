@@ -66,6 +66,50 @@ def upload_competition_image_to_minio(uploaded_files, bucket_name=settings.MINIO
     return image_urls
 
 
+def validate_pdf_file(file):
+    """验证PDF文件"""
+    if file.content_type != 'application/pdf':
+        raise ValidationError("只支持PDF格式的文件")
+
+    # 验证文件大小（最大10MB）
+    max_size = settings.MINIO_MAX_UPLOAD_SIZE
+    if file.size > max_size:
+        raise ValidationError("文件大小不能超过10MB")
+
+def upload_patent_file_to_minio(uploaded_file, bucket_name=settings.MINIO_STORAGE_MEDIA_BUCKET_NAME, prefix=settings.MINIO_STORAGE_MEDIA_PATENTS):
+    """
+    上传专利文件到MinIO并返回URL
+    :param uploaded_file: InMemoryUploadedFile对象
+    :param bucket_name: 存储桶名称
+    :param prefix: 存储路径前缀
+    :return: 文件访问URL
+    """
+    # 验证文件
+    validate_pdf_file(uploaded_file)
+
+    # 生成唯一文件名
+    ext = os.path.splitext(uploaded_file.name)[1].lower()
+    object_name = f"{prefix}/{uuid.uuid4().hex}{ext}"
+
+    # 确保存储桶存在
+    if not minio_client.bucket_exists(bucket_name):
+        minio_client.make_bucket(bucket_name)
+
+    # 读取文件内容
+    file_data = uploaded_file.read()
+
+    # 上传到MinIO
+    minio_client.put_object(
+        bucket_name=bucket_name,
+        object_name=object_name,
+        data=BytesIO(file_data),
+        length=len(file_data),
+        content_type=uploaded_file.content_type
+    )
+
+    # 构造文件的访问 URL
+    return f"{settings.MINIO_STORAGE_ENDPOINT}/{bucket_name}/{object_name}"
+
 
 def delete_files_from_minio(file_urls, bucket_name=settings.MINIO_STORAGE_MEDIA_BUCKET_NAME):
     """删除MinIO上的文件"""
