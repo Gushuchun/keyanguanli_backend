@@ -94,6 +94,8 @@ class PatentCreateSerializer(serializers.ModelSerializer):
 
 
 class PatentUpdateSerializer(serializers.ModelSerializer):
+    file = serializers.FileField(required=False)
+
     class Meta:
         model = Patent
         fields = ['number', 'name', 'date', 'description', 'patent_type', 'file',

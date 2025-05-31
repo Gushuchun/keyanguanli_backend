@@ -26,4 +26,5 @@ urlpatterns = [
     path('api/settings/', include('apps.settings.urls')),
     path('api/admin/', include('apps.admin.urls')),
     path('api/patent/', include('apps.patent.urls')),
+    path('api/paper/', include('apps.paper.urls')),
 ]
