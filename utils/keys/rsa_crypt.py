@@ -9,7 +9,7 @@ def read_private_key() -> bytes:
         return private_key
 
 def read_public_key() -> bytes:
-    with open('utils/keys/private_key.pem', 'rb') as key_file:
+    with open('utils/keys/public_key.pem', 'rb') as key_file:
         private_key = key_file.read()
         return private_key
 

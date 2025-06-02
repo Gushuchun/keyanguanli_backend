@@ -3,8 +3,7 @@ import jwt
 import datetime
 from django.conf import settings
 
-# 修改此处：将 days=1 改为 seconds=5
-JWT_EXPIRATION_DELTA = datetime.timedelta(days=1)  # 5秒有效期
+JWT_EXPIRATION_DELTA = datetime.timedelta(days=1)
 
 def generate_token(user_id, role="student"):
     SECRET_KEY = settings.SECRET_KEY
@@ -12,7 +11,7 @@ def generate_token(user_id, role="student"):
     payload = {
         'user_id': user_id,
         'role': role,
-        'exp': datetime.datetime.utcnow() + JWT_EXPIRATION_DELTA,  # 有效期 5 秒
+        'exp': datetime.datetime.utcnow() + JWT_EXPIRATION_DELTA,
         'iat': datetime.datetime.utcnow(),
         'jti': str(uuid.uuid4())
     }
